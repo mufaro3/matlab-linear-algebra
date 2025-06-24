@@ -1,0 +1,5 @@
+Selected MATLAB practice from "Exploring linear Algebra: Labs and Projects with MATLAB" by Crista Arangala
+
+Note: all projects are designed to be run using GNU Octave, NOT MATLAB (not buying a license). To run file 'ch1_matrices/lab0.m', call
+
+$ octave ch1_matrices/lab0.m
