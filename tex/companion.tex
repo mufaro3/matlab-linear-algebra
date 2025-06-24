@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage{parskip, amsmath, physics, multicol}
+
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\exercise}[1]{\uppercase{\textbf{EXERCISE #1}}\label{#1}}
+
+\begin{document}
+\exercise{2(g)}
+
+Given
+\begin{equation*}
+  \mat{M} = \begin{pmatrix}
+    1 & 2 & 0 \\
+    0 & 0 & 3 \\
+    0 & 1 & 0
+  \end{pmatrix},
+\end{equation*}
+we can produce $\mat{M} \to \mat{I}_3$ via:
+\begin{enumerate}
+\item Divide row $3$ by 3.
+\item Add multiples of -2 from row 2 to row 1.
+\item Swap rows 2 and 3\footnote{This was originally wrong and placed first. You need to swap last because matrix multiplication is right-associative, so the rightmost operation occurs first, not last. In other words, a ``correct'' way to approach this would be to do the entire process in reverse when multiplying.}.
+\end{enumerate}
+This effect can be produced by the following elementary matrices. 
+
+The swap matrix can be created from emulation with $I_3$:
+\begin{equation*}
+\mat{E}_{swap} = 
+\begin{pmatrix}
+ 1 & 0 & 0 \\
+ 0 & 0 & 1 \\
+ 0 & 1 & 0
+\end{pmatrix},
+\end{equation*}
+similarly, the division matrix would be
+\begin{equation*}
+\mat{E}_{div} =
+\begin{pmatrix}
+ 1 & 0 & 0 \\
+ 0 & 1 & 0 \\
+ 0 & 0 & \frac{1}{3}
+\end{pmatrix},
+\end{equation*}
+and lastly, the additive matrix would be
+\begin{equation*}
+\mat{E}_{add} =
+\begin{pmatrix}
+1 & -2 & 0 \\
+0 & 1  & 0 \\
+0 & 0  & 1
+\end{pmatrix}.
+\end{equation*}
+Altogether, the following multiplication should hold true:
+\begin{equation*}
+\mat{E}_{div} \mat{E}_{add} \mat{E}_{swap} \mat{M} = \mat{I}_{3}
+\end{equation*}
+\newpage
+
+\exercise{2(h)}
+
+Given
+\begin{align*}
+x + 2y &= 4 \\
+3z &= 6 \\
+y &= 8,
+\end{align*}
+we can produce the following coefficient matrix $\mat{A}$ and constant vector $\mat{B}$:
+\begin{equation*}
+\mat{A} = 
+\begin{pmatrix} 
+1 & 2 & 0 \\ 
+0 & 0 & 3 \\ 
+0 & 1 & 0 
+\end{pmatrix} 
+\hspace{0.10\linewidth} 
+\mat{B} = 
+\begin{pmatrix} 
+4 \\ 6 \\ 8
+\end{pmatrix},
+\end{equation*}
+and given that $\mat{A} = \mat{M},$ from exercise 2(g) the solutions can be calculated by performing the RREF calculations on $\mat{B}$ to produce solution vector $\mat{S}$:
+\begin{equation*}
+\mat{E}_{div} \mat{E}_{add} \mat{E}_{swap} \mat{B} = \mat{S},
+\end{equation*}
+yielding
+\begin{equation*}
+\mat{S} = \begin{pmatrix} -12 \\ 8 \\ 2 \end{pmatrix},
+\end{equation*}
+showing that $x=-12, y = 8, z=2$.
+
+\exercise{2(i)}
+
+This isn't solvable because the best RREF form is
+\begin{equation*}
+\mat{[M | B]} = 
+\begin{pmatrix}
+1 & 0 & -6 & 4 \\
+0 & 1 &  3 & 6 \\
+0 & 0 &  0 & 6 
+\end{pmatrix}
+\end{equation*}
+or, in other words, equations (2) and (3) contradict each other.
+
+\exercise{2(j)}
+
+The initial state of the system is
+\begin{equation*}
+\begin{pmatrix}
+1 & 2 & 0 & 4 \\
+0 & 1 & 3 & 6 \\
+0 & 2 & 6 & 12
+\end{pmatrix},
+\end{equation*}
+and the RREF of this system becomes
+\begin{equation*}
+\begin{pmatrix}
+1 & 0 & -6 & -8 \\
+0 & 1 & 3 & 6 \\
+0 & 0 & 0 & 0
+\end{pmatrix}.
+\end{equation*}
+Again, this system is not solvable as equations 2 and 3 are equivalent, resulting in this system not containing enough information to be adequately solved, but the reduced echelon form of the coefficient matrix is the same as in exercise 2(i).
+
+\end{document}
