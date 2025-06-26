@@ -2,9 +2,90 @@
 \usepackage{parskip, amsmath, physics, multicol}
 
 \newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\exercise}[1]{\uppercase{\textbf{EXERCISE #1}}\label{#1}}
+\newcommand{\exercise}[1]{\textbf{EXERCISE #1}\label{#1}}
+\newcommand{\theorem}[2]{\textbf{THEOREM #1.} #2}
+\newcommand{\proof}{\textbf{PROOF}}
+\newcommand{\notes}{\textbf{NOTES}}
 
 \begin{document}
+
+\textbf{\Large COMPANION NOTES AND SOLUTIONS}
+
+by Mufaro Machaya
+
+\tableofcontents
+\newpage
+
+\section{Chapter 1: Matrices}
+
+\subsection{Labs 0 and 1: Introduction and Matrix Basics}
+
+\notes
+
+\begin{enumerate}
+\item Matrix addition is commutative, so addition in any order produces the same result.
+\begin{equation}
+  \mat{A} + \mat{B} = \mat{B} + \mat{A}
+\end{equation}
+\item Scalar multiplication is applied on all elements of the given matrix as a regular multiplication. For example, for $3 \times 3$ matrix $\mat{A}$ and scalar $s$:
+\begin{equation}
+    s\mat{A} =
+\begin{pmatrix} 
+  sA_{11} & sA_{12} & sA_{13} \\
+  sA_{21} & sA_{22} & sA_{23} \\
+  sA_{31} & sA_{32} & sA_{33}
+\end{pmatrix}.
+\end{equation}
+\item A transposition is essentially swapping your rows and columns (do not, however, mistake it for a rotation), so $2 \times 3$ matrix $\mat{A}$ would produce $3 \times 2$ matrix $\mat{A}^{-1}$:
+\begin{equation}
+  \begin{pmatrix}
+    A_{11} & A_{12} & A_{13} \\
+    A_{21} & A_{22} & A_{23}
+  \end{pmatrix}^{T} =
+  \begin{pmatrix}
+    A_{11} & A_{21} \\
+    A_{12} & A_{22} \\
+    A_{13} & A_{23}
+  \end{pmatrix}
+\end{equation}
+\item Matrix multiplication essentially computes the dot products of the rows of the first matrix with the columns of the second matrix, thus why the number of rows of the first matrix must equal the number of columns of the second. For example, for $2 \times 3$ matrix $\mat{A}$ and $3 \times 2$ matrix $\mat{B}$, the resulting matrix would be
+\begin{equation*}
+  \mat{A} \mat{B} =
+\begin{pmatrix}
+  \mat{A}_{r=1} \cdot \mat{B}_{c=1} & \mat{A}_{r=1} \cdot \mat{B}_{c=2} \\
+  \mat{A}_{r=2} \cdot \mat{B}_{c=1} & \mat{A}_{r=2} \cdot \mat{B}_{c=2}
+\end{pmatrix}
+  \footnote{$M_{r=m}$ denotes ``the vector comprised of the elements of row $m$ in matrix $\mat{M}$'' and $M_{c=n}$ denotes ``the vector comprised of the elements of column $n$ in matrix $\mat{M}$.''}
+\end{equation*}
+\begin{equation}
+    =
+\begin{pmatrix}
+  A_{11} B_{11} + A_{12} B_{21} + A_{13} B_{31} &
+  A_{11} B_{12} + A_{12} B_{22} + A_{13} B_{32} \\
+  A_{21} B_{11} + A_{22} B_{21} + A_{23} B_{31} &
+  A_{21} B_{12} + A_{22} B_{22} + A_{23} B_{32}
+\end{pmatrix}
+\end{equation}
+\item Matrix multiplication is not commutative, so multiplying matrices in different orders will produce different results.
+\begin{equation}
+  \mat{A} \mat{B} \neq \mat{B} \mat{A}
+\end{equation}
+\item Matrix addition and scalar multiplication are commutative with transposition, but multiplication is not.
+\begin{align}
+  (\mat{A} + \mat{B})^T &= \mat{A}^T + \mat{B}^T \\
+  (s\mat{A})^T &= s\mat{A}^T \\
+  (\mat{A}\mat{B})^T &\neq \mat{A}^T \mat{B}^T
+\end{align}
+\item The trace of a matrix is the sum of the elements on its main diagonal.
+\item The trace is commutative with matrix addition (i.e., $\tr(\mat{A} + \mat{B}) = \tr(\mat{A}) + \tr(\mat{B})$), but non-commutative with matrix multiplication. 
+\item Matrix multiplication within trace in either order will produce the same result,
+\begin{equation}
+\tr(\mat{AB}) = \tr(\mat{BA})
+\end{equation}
+\end{enumerate}
+
+\subsection{Lab 2: A Matrix Representation of Linear Systems}
+
 \exercise{2(g)}
 
 Given
@@ -120,5 +201,150 @@ and the RREF of this system becomes
 \end{pmatrix}.
 \end{equation*}
 Again, this system is not solvable as equations 2 and 3 are equivalent, resulting in this system not containing enough information to be adequately solved, but the reduced echelon form of the coefficient matrix is the same as in exercise 2(i).
+
+\subsection{Lab 3: Powers, Inverses, and Special Matrices}
+
+\notes
+
+\begin{enumerate}
+\item A matrix multiplied by its transposition will produce a gram matrix which is symmetric (does not change on transposition).
+\begin{equation}
+  \mat{M}^T \mat{M} = (\mat{M}^T \mat{M})^T \neq \mat{M} \mat{M}^T = (\mat{M} \mat{M}^T)^T
+\end{equation}
+\item A matrix multiplied by its inverse, in any order, will produce an identity matrix.
+\begin{equation}
+  \mat{M} \mat{M}^{-1} = \mat{M}^{-1} \mat{M} = \mat{I}_{n}
+\end{equation}
+\item A matrix inverted twice produces itself.
+\begin{equation}
+(\mat{M}^{-1})^{-1} = \mat{M}
+\end{equation}
+\item Matrix multiplication is not commutative with inversion, however, they are commutative in alternating order.
+\begin{equation}
+(\mat{AB})^{-1} = \mat{B}^{-1} \mat{A}^{-1} \neq (\mat{BA})^{-1} = \mat{A}^{-1} \mat{B}^{-1}
+\end{equation}
+\item Matrix inversion is commutative with transposition.
+\begin{equation}
+(\mat{M}^T)^{-1} = (\mat{M}^{-1})^{T}
+\end{equation}
+\item A square matrix $\mat{M}$ is
+\begin{enumerate}
+\item Symmetric when $\mat{M} = \mat{M}^T$
+\item Diagonal when $\mat{M}_{ij} = 0$ if $i \neq j$
+\item Upper triangular when $\mat{M}_{ij} = 0$ if $i > j$ or lower triangular when $i < j$.
+\end{enumerate}
+\item Assuming a matrix to be square, a matrix plus its transposition is symmetric.
+\begin{equation}
+\mat{M} + \mat{M}^T = (\mat{M} + \mat{M}^T)^T
+\end{equation}
+\end{enumerate}
+
+\theorem{1}{The inverse of an elementary matrix is an elementary matrix.}
+
+There are three elementary operations to be considered: scalar multiplication of a row, addition of the scalar multiplication from one row to another, and swapping rows. Let $\mat{I}_{m}$ be an identity matrix of size $m \times m$, which can be described in the following matrix-vector notation,
+\begin{equation*}
+  \mat{I}_{m} = \begin{pmatrix}
+    \va{I}_{m,r=1} \\
+    \va{I}_{m,r=2} \\
+    \vdots \\
+    \va{I}_{m,r=i} \\
+    \vdots \\
+    \va{I}_{m,r=m-1} \\
+    \va{I}_{m,r=m}
+  \end{pmatrix},
+\end{equation*}
+where $\va{I}_{m,r=i}$ is a vector of row $i$ in $\mat{I}_{m}$. This notation can be further simplified to produce generalized elementary matrices for each operation. Let row $i$ be our of interest (the row in which we are manipulating/changing) for scalar multiplication and rows $i$ and $j$ be our rows of interest for scalar addition and swapping. Therefore, we can denote the elementary operations, in order, as
+\begin{align*}
+s\va{I}_{m,r=i} &\to i \\
+\va{I}_{m,r=i} + s\va{I}_{m,r=j} &\to i \\
+\va{I}_{m,r=i} &\leftrightarrow \va{I}_{m,r=j}
+\end{align*}
+where $X \to I_{m,r=i}$ indicates that the result of operation $X$ is stored at row $i$, and $\va{A}_{r=1} \leftrightarrow \va{A}_{r=2}$ swaps the vectors of $\mat{A}$ at rows 1 and 2.
+
+Given this notation, we can write each of their corresponding elementary matrices. For scalar multiplication, this would be
+\begin{equation*}
+\mat{E}_{mult} = \begin{pmatrix}
+  \vdots \\
+  s\va{I}_{m,r=i}\\
+  \vdots
+\end{pmatrix},
+\end{equation*}
+so its inverse, naturally, would be
+\begin{equation*}
+\mat{E}_{mult}^{-1} = \begin{pmatrix}
+  \vdots \\
+  \frac{1}{s}\va{I}_{m,r=i}\\
+  \vdots
+\end{pmatrix},
+\end{equation*}
+which, similarly, is an elementary matrix of scalar multiplication by $1/s$. Likewise, scalar addition, the elementary matrix would be
+\begin{equation*}
+\mat{E}_{add} = \begin{pmatrix}
+  \vdots \\
+  \va{I}_{m,r=i} + s\va{I}_{m,r=j} \\
+  \vdots
+\end{pmatrix},
+\end{equation*}
+so its inverse, naturally, would be
+\begin{equation*}
+\mat{E}_{add}^{-1} = \begin{pmatrix}
+  \vdots \\
+  \va{I}_{m,r=j} - s\va{I}_{m,r=j} \\
+  \vdots
+\end{pmatrix},
+\end{equation*}
+which, similarly, is an elementary matrix of scalar addition by $-s$. Lastly, the inverse of any elementary matrix produced by a row swap is itself, and that can be proven with the following example:
+\begin{equation*}
+\mat{E}_{swap} = \begin{pmatrix}
+\vdots \\
+\va{I}_{m,r=j} \\
+\vdots \\
+\va{I}_{m,r=i} \\
+\vdots
+\end{pmatrix}
+\end{equation*} 
+where $i<j$. The gaussian elimination matrix would be
+\begin{equation*}
+[\mat{E}_{swap}|\mat{I}_{m}] = \begin{pmatrix}
+\begin{tabular}{c|c}
+\begin{matrix}
+\vdots \\
+\va{I}_{m,r=j} \\
+\vdots \\
+\va{I}_{m,r=i} \\
+\vdots
+\end{matrix} &
+\begin{matrix}
+\vdots \\
+\va{I}_{m,r=i} \\
+\vdots \\
+\va{I}_{m,r=j} \\
+\vdots
+\end{matrix}
+\end{tabular}
+\end{pmatrix},
+\end{equation*} 
+so therefore, the corresponding inverse matrix would be
+\begin{equation*}
+\begin{pmatrix}
+\begin{tabular}{c|c}
+\begin{matrix}
+\vdots \\
+\va{I}_{m,r=i} \\
+\vdots \\
+\va{I}_{m,r=j} \\
+\vdots
+\end{matrix} &
+\begin{matrix}
+\vdots \\
+\va{I}_{m,r=j} \\
+\vdots \\
+\va{I}_{m,r=i} \\
+\vdots
+\end{matrix}
+\end{tabular}
+\end{pmatrix} = [ \mat{I}_{m}, \mat{E}_{swap} ],
+\end{equation*}
+thus showing that $\mat{E}_{swap}^{-1} = \mat{E}_{swap}$.
 
 \end{document}
