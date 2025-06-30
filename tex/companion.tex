@@ -1,11 +1,15 @@
 \documentclass[12pt]{article}
-\usepackage{parskip, amsmath, physics, multicol}
+\usepackage{parskip, multicol}
+\usepackage{amssymb, amsmath, amsthm, physics}
+\usepackage{hyperref}
 
 \newcommand{\mat}[1]{\mathbf{#1}}
 \newcommand{\exercise}[1]{\textbf{EXERCISE #1}\label{#1}}
 \newcommand{\theorem}[2]{\textbf{THEOREM #1.} #2}
-\newcommand{\proof}{\textbf{PROOF}}
 \newcommand{\notes}{\textbf{NOTES}}
+\newcommand{\rref}{\text{RREF}}
+\newcommand{\eig}{\text{eig }}
+\newcommand{\ct}[1]{\mat{\overline{#1}}^{T}}
 
 \begin{document}
 
@@ -241,110 +245,607 @@ Again, this system is not solvable as equations 2 and 3 are equivalent, resultin
 
 \theorem{1}{The inverse of an elementary matrix is an elementary matrix.}
 
-There are three elementary operations to be considered: scalar multiplication of a row, addition of the scalar multiplication from one row to another, and swapping rows. Let $\mat{I}_{m}$ be an identity matrix of size $m \times m$, which can be described in the following matrix-vector notation,
-\begin{equation*}
-  \mat{I}_{m} = \begin{pmatrix}
-    \va{I}_{m,r=1} \\
-    \va{I}_{m,r=2} \\
-    \vdots \\
-    \va{I}_{m,r=i} \\
-    \vdots \\
-    \va{I}_{m,r=m-1} \\
-    \va{I}_{m,r=m}
-  \end{pmatrix},
-\end{equation*}
-where $\va{I}_{m,r=i}$ is a vector of row $i$ in $\mat{I}_{m}$. This notation can be further simplified to produce generalized elementary matrices for each operation. Let row $i$ be our of interest (the row in which we are manipulating/changing) for scalar multiplication and rows $i$ and $j$ be our rows of interest for scalar addition and swapping. Therefore, we can denote the elementary operations, in order, as
-\begin{align*}
-s\va{I}_{m,r=i} &\to i \\
-\va{I}_{m,r=i} + s\va{I}_{m,r=j} &\to i \\
-\va{I}_{m,r=i} &\leftrightarrow \va{I}_{m,r=j}
-\end{align*}
-where $X \to I_{m,r=i}$ indicates that the result of operation $X$ is stored at row $i$, and $\va{A}_{r=1} \leftrightarrow \va{A}_{r=2}$ swaps the vectors of $\mat{A}$ at rows 1 and 2.
+\begin{proof}
+There are three elementary operations to be considered: row swaps, multiplication/division by a scalar, and addition/subtraction of a row (by a scalar). 
 
-Given this notation, we can write each of their corresponding elementary matrices. For scalar multiplication, this would be
+Let $\mat{E}_{swap}$ be the elementary matrix produced by a swap. By gaussian elimination, $\mat{E}_{swap}$ is its own inverse,
+$$\mat{E}_{swap}^{-1} = \mat{E}_{swap},$$
+as it can be undone (returned to the identity matrix $\mat{I}$) by repeating the swap that produced it. 
+
+Let $\mat{E}_{scale}$ be the elementary matrix produced by the multiplication of any scalar $s$. This multiplication by $s$ can be undone by division by $s$, so $\mat{E}^{-1}_{scale}$ would be the elementary matrix produced by the divison of $s$. 
+
+Let $\mat{E}_{add}$ be the elementary matrix produced by the addition by any scalar multiple $s$ from one row to another. As addition can be undone by subtraction, the addition by a scalar multiple $s$ can be undone by the subtraction of the same values.
+\end{proof}
+
+\theorem{2}{If $\mat{A}$ is invertible then the reduced row echelon form of $\mat{A}$ is $\mat{I}$.}
+
+\begin{proof}
+If $\mat{A} \in \mathbb{R}^{n \times n}$ is invertible, then there exists some composite matrix $\mat{E}$ as the product of elementary operations that satisfies the following two equations:
 \begin{equation*}
-\mat{E}_{mult} = \begin{pmatrix}
-  \vdots \\
-  s\va{I}_{m,r=i}\\
-  \vdots
-\end{pmatrix},
+\mat{EA} = \mat{I}, \hspace{0.25\textwidth} \mat{EI} = \mat{A}^{-1}.
 \end{equation*}
-so its inverse, naturally, would be
+These two equations correspond to the Gauss-Jordan elimination process, showing the transformation results on the left and right sides, and the left equation will reduce $\mat{A}$ into its reduced row echelon form. Therefore, the RREF form of $\mat{A}$ must be $\mat{I}$.
+\end{proof}
+
+\theorem{3}{If the reduced row echelon form of $\mat{A}$ is $\mat{I}$, then $\mat{A}$ is invertible.}
+
+\begin{proof}
+As shown in theorem 2, for $\mat{A} \in \mathbb{R}^{n \times n}$ to satisfy $\rref(\mat{A}) = \mat{I}$, there must be a composite matrix $\mat{E} \in \mathbb{R}^{n \times n}$ such that $\mat{EA} = \mat{I}$, and therefore, this same matrix will simultaneously produce $\mat{EI} = \mat{A}^{-1}$ by Gauss-Jordan elimination, so $\mat{A}$ must be invertible.
+\end{proof}
+
+\theorem{4}{$\mat{A}$ is a square invertible matrix if and only if $\mat{A}$ can be written as the product of elementary matrices.}
+
+\begin{proof}
+Again, for $\mat{A} \in \mathbb{R}^{n \times n}$ to be invertible, it must satisfy $\mat{EA} = \mat{I}$ and $\mat{EI} = \mat{A}^{-1}$ for some product matrix $\mat{E}$ of elementary matrices in form
+$$\mat{E} = \mat{E}_{k} \mat{E}_{k-1} \dots \mat{E}_{2} \mat{E}_{1} = \left( \prod_{n=1}^{k} \mat{E}_{n} \right)^{\sim}.\footnote{The tilde denotes that this product is in reverse order.}\footnote{From here on out, further matricies will be described as "composite."}$$
+Therefore, $\mat{A} = \mat{E}^{-1}$, and as the inverse of elementary matrices is elementary, $A$ inherently must be the product of elementary matrices if it is invertible. Furthermore, all composite matrices are inherently invertible because all elementary matrices are invertible, so altogehter, $\mat{A}$ is square and invertible if and only if its a composite product of elementary matrices. 
+\end{proof}
+
+\theorem{5}{If $\mat{A}$ is invertible then $\mat{A}^{k}$ is invertible for any natural number $k$.}
+
+\begin{proof}
+If $\mat{A} \in \mathbb{R}^{n \times n}$ is invertible, then $\mat{A} \mat{A}^{-1} = \mat{A}^{-1} \mat{A} = I$, so the multiplication between them is commutative, meaning that 
+$$\mat{A}^{k} (\mat{A}^{-1})^{k} = (\mat{A} \mat{A}^{-1})^{k} = \mat{I}^{k} = \mat{I}.$$
+\end{proof}
+
+\theorem{6}{If $\mat{A}$ is symmetric so is $\mat{A}^{T}$.}
+
+\begin{proof}
+By the definition of symmetry, $\mat{A} = \mat{A}^{T}$, so $\mat{A}^{T}$ is symmetric.
+\end{proof}
+
+\theorem{7}{If $\mat{A}$ is a symmetric invertible matrix then $\mat{A}^{-1}$ is symmetric.}
+
+\begin{proof}
+Transposition is commutative with inversion, so $(\mat{A}^{T})^{-1} = (\mat{A}^{-1})^{T}.$ Therefore, if $\mat{A} = \mat{A}^{T}$ then $\mat{A}^{-1} = (\mat{A}^{T})^{-1} = (\mat{A}^{-1})^{T}$.
+\end{proof}
+
+\theorem{8}{If $\mat{A}$ and $\mat{B}$ are symmetric matrices of the same size then $\mat{A} + \mat{B}$ is symmetric.}
+
+\begin{proof}
+$\mat{A} = \mat{A}^{T}$ and $\mat{B} = \mat{B}^{T}$, so 
+$$\mat{A} + \mat{B} = \mat{A}^{T} + \mat{B}^{T} = \mat{A}^{T} + \mat{B} = \mat{A} + \mat{B}^{T}.$$
+Matrix multiplication is inherently commutative with transposition, so $(\mat{A} + \mat{B})^{T} = \mat{A}^{T} + \mat{B}^{T} = \mat{A} + \mat{B}$.
+\end{proof}
+
+\theorem{9}{If $\mat{A}$ and $\mat{B}$ are symmetric matrices of the same size, then $\mat{AB}$ is symmetric.}
+
+\begin{proof}
+As $\mat{A} = \mat{A}^{T}$ and $\mat{B} = \mat{B}^{T}$, then $\mat{AB} = \mat{A}^{T} \mat{B}^{T} = \mat{A}^{T} \mat{B} = \mat{A} \mat{B}^{T}$, and as matrix multiplication is commutative with transposition in a reverse order (i.e., $(\mat{AB})^{T} = \mat{B}^{T} \mat{A}^{T}$ and vice versa), because both $\mat{A}$ and $\mat{B}$ are symmetric, the matrix multiplication and transposition in this case are fully commutative, so $\mat{AB} = \mat{BA} = \mat{A}^{T} \mat{B}^{T} = (\mat{AB})^{T} = \mat{B}^{T} \mat{A}^{T} = (\mat{BA})^{T}$.
+\end{proof}
+
+\theorem{10}{If $\mat{A}$ is a square matrix then $\mat{A} + \mat{A}^{T}$ is symmetric.}
+
+\begin{proof}
+Transposition is commutative with addition, thus making it distributive: $(\mat{A} + \mat{A}^{T})^{T} = \mat{A}^{T} + (\mat{A}^{T})^{T} = \mat{A}^{T} + \mat{A}.$
+\end{proof}
+
+\theorem{11}{The sum of upper triangular matrices is upper triangular.}
+
+\begin{proof}
+This is intuitively true based on how matrix addition works. Let $\mat{A} \in \mathbb{R}^{n \times n}$ and $\mat{B} \in \mathbb{R}^{n \times n}$. All $A_{ij} + B_{ij} = 0$ where $i > j$ as $A_{ij} = 0$ and $B_{ij} = 0$. 
+\end{proof}
+
+\subsection{Lab 4: Graph Theory and Adjacency Matrices}
+
+\notes
+
+\begin{enumerate}
+\item Graphs are comprised of nodes (points/places/etc) and edges (the relationships between the nodes, like paths/connections).
+\item An edge and the node connected to it are called an indicent. Two nodes connected by an edge are considered adjacent.
+\item Graphs can be represented as matrices in the form of an adjacency matrix, which are symmetric, square matrices such that indexing the matrix for the points in either order will produce the number of connections between the nodes at that depth, such as:
 \begin{equation*}
-\mat{E}_{mult}^{-1} = \begin{pmatrix}
-  \vdots \\
-  \frac{1}{s}\va{I}_{m,r=i}\\
-  \vdots
-\end{pmatrix},
+\mat{M} = \begin{pmatrix}
+0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 0 & 1 \\
+0 & 1 & 1 & 0
+\end{pmatrix}.
 \end{equation*}
-which, similarly, is an elementary matrix of scalar multiplication by $1/s$. Likewise, scalar addition, the elementary matrix would be
-\begin{equation*}
-\mat{E}_{add} = \begin{pmatrix}
-  \vdots \\
-  \va{I}_{m,r=i} + s\va{I}_{m,r=j} \\
-  \vdots
-\end{pmatrix},
-\end{equation*}
-so its inverse, naturally, would be
-\begin{equation*}
-\mat{E}_{add}^{-1} = \begin{pmatrix}
-  \vdots \\
-  \va{I}_{m,r=j} - s\va{I}_{m,r=j} \\
-  \vdots
-\end{pmatrix},
-\end{equation*}
-which, similarly, is an elementary matrix of scalar addition by $-s$. Lastly, the inverse of any elementary matrix produced by a row swap is itself, and that can be proven with the following example:
-\begin{equation*}
-\mat{E}_{swap} = \begin{pmatrix}
-\vdots \\
-\va{I}_{m,r=j} \\
-\vdots \\
-\va{I}_{m,r=i} \\
-\vdots
+For example, let $\mat{M}$ be a the adjacency matrix storing two points, $a$ and $b$ (where $a$ and $b$ each correspond to indices of the matrix respectively). The number of connections $n$ long (passing through $n$ edges) will be found at
+\begin{equation}
+\mat{M}^{n}(a,b) \hspace{0.125\textwidth} \text{and} \hspace{0.125\textwidth} \mat{M}^{n}(b,a).
+\end{equation}  
+\end{enumerate}
+
+\subsection{Lab 5: Permutations and Determinants}
+
+\notes
+
+\begin{enumerate}
+\item Given the number of options/variables, $n$, the number of permutations given $n$ will be $n!$.
+\item The determinant of a $2 \times 2$ matrix is
+\begin{equation}
+\det \begin{pmatrix}
+  a_{11} & a_{12} \\
+  a_{21} & a_{22}
+\end{pmatrix} = a_{11} a_{22} - a_{12} a_{21}.
+\end{equation}
+\item If $\det \mat{M} = 0$ then $\mat{M}$ is not invertible.
+\item For scalar $k$ and $n \times n$ matrix $\mat{M}$, $\det ( k \mat{M} ) = k^{n} \det \mat{M}$
+\item The determinant of the identity matrix, of any size, is always $1$.
+\begin{equation}
+\det \mat{I}_{n} = 1 \text{ for } n \in \{ 1, 2, \dots  \}
+\end{equation}
+\item The determinant of a matrix is equal to the determinant of its transposition. 
+\begin{equation}
+\det \mat{M} = \det \mat{M}^{T}
+\end{equation}
+\item Matrix multiplication is fully commutative with determinants, so
+\begin{equation}
+\det ( \mat{AB} ) = \det ( \mat{BA} ) = \det \mat{A} \det \mat {B}
+\end{equation}
+\item Again, matrix addition is commutative, so 
+\begin{equation}
+\det ( \mat{A} + \mat{B} ) = \det ( \mat{B} + \mat{A} ),
+\end{equation}
+but matrix addition is not commutative with calculating determinants, so
+\begin{equation}
+\det ( \mat{A} + \mat{B} ) \neq \det \mat{A} \det \mat{B}.
+\end{equation}
+\item The determinant of any triangular matrix (upper/lower triangular and diagonal matrices) are just the product of the main diagonal.
+\item An alternative way to calculate the determinant is based on the trace of a matrix using the Cayley-Hamilton theorem\footnote{\href{https://en.wikipedia.org/wiki/Cayley\%E2\%80\%93Hamilton_theorem}{Cayley–Hamilton theorem on Wikipedia.}} for a $2 \times 2$ matrix $\mat{M}_{2}$,
+\begin{equation}
+\det \mat{M}_{2} = \frac{ (\tr \mat{M}_{2})^{2} - \tr \mat{M}_{2}^{2} }{2},
+\end{equation}
+and for a $3 \times 3$ matrix $\mat{M}_{3}$,
+\begin{equation}
+\det \mat{M}_{3} = \frac{ (\tr \mat{M}_{3})^3 - 3\tr \mat{M}_{3}^2 \tr \mat{M}_{3} + 2 \tr \mat{M}^3 }{6}
+\end{equation} 
+\end{enumerate}
+
+\exercise{2(a-c)}
+
+Let $\mat{E}$ be an elementary matrix produced by one of the following operations. 
+\begin{enumerate}
+\item If $\mat{E}$ is produced by scalar $k$ in a row-scaling operation, $\det \mat{E} = k.$
+\item If $\mat{E}$ is produced by a scalar addition, $\det \mat{E} = 1$ (unchanged).
+\item If $\mat{E}$ is produced by a row swap, $\det \mat{E} = -1$.
+\end{enumerate}
+
+\theorem{12}{If $\det \mat{A} \neq 0$ then $\mat{A}$ is invertible.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$. If $\det \mat{A} \neq 0$ then $\mat{A}$ can be reduced to $\mat{I}_{n}$ using only elementary operations, implying $\mat{A}$ satisfies $\mat{EA} = \mat{I}$ for some composite/product matrix of elementary matrices, $\mat{E}$. By definition, $\mat{E} = \mat{A}^{-1}$, making $\mat{A}$ invertible.
+\end{proof}
+
+\theorem{13}{If $\mat{A}$ is invertible then $\det \mat{A} \neq 0$.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be an invertible matrix. $\mat{A}$ therefore satisfies $\mat{EA} = \mat{I}$ for some matrix $\mat{E}$ comprised of the product of elementary matrices. By definition, $\mat{A} = \mat{E}^{-1}$, and as the inverse of the product of elementary matrices will be the product of elementary matrices, $\mat{A}$ is also a product of elementary matrices. As the determinant of any elementary matrix is nonzero, and the determinant of a product is the product of determinants, $\det \mat{A} = \det \mat{E}^{-1} \neq 0$. 
+\end{proof}
+
+\theorem{14}{If $\mat{A}$ and $\mat{B}$ are invertible matrices of the same size, then $\mat{A} + \mat{B}$ is invertible.}
+
+\begin{proof}
+This is incorrect, because $\det \mat{A} + \det \mat{B} \neq \det ( \mat{A} + \mat{B} )$. For example, if $\mat{A} = -\mat{B}$. Let $\mat{A} = -\mat{I}_{2}$ and $\mat{B} = \mat{I}_{2}$. $\det \mat{A} = \det \mat{B} = 1$, but $\det ( \mat{A} + \mat{B} ) = 0$.
+\end{proof}
+
+\theorem{15}{If $\mat{A}$ is a square matrix, then $\det \mat{A} = \det \mat{A}^{T}.$}
+
+\begin{proof}
+Let $\mat{M} \in \mathbb{R}^{n \times n}. \det \mat{M}$ is defined via permutations of row and column indices of $\mat{M}$, so swapping the rows and columns will not affect $\det \mat{M}$.
+\end{proof}
+
+\theorem{16}{If $\mat{A}$ and $\mat{B}$ are matrices of the same size then $\mat{A}$ and $\mat{B}$ are invertible if and only if $\mat{AB}$ is invertible.}
+
+\begin{proof}
+Let $\mat{A}, \mat{B} \in \mathbb{R}^{n \times n}$. If $\mat{AB}$ is invertible, then $\det \mat{AB} \neq 0$, and as $\det \mat{AB} = \det \mat{A} \det \mat{B}$, $\det \mat{A} \neq 0$ and $\det \mat{B} \neq 0$. Therefore, $\mat{A}$ and $\mat{B}$ are invertible. Opposingly, if $\mat{A}$ and $\mat{B}$ are invertible, $\det \mat{A} \ne 0$ and $\det \mat{B} \ne 0$. Therefore, $\det \mat{AB} \ne 0$, so $\mat{AB}$ must be invertible.
+\end{proof}
+
+\subsection{Lab 6: 4 $\times$ 4 Determinants and Beyond}
+
+\notes
+
+\begin{enumerate}
+\item The equation for calculating matrices higher than $2 \times 2$ follows a row or column-based expansion in form
+\begin{equation}
+\det \mat{M} \bigg\rvert_{i=c} = \sum^{n}_{j = 1} (-1)^{c+j} a_{cj} \det( \mat{M}^{*}_{cj} \in \mat{M} )
+\end{equation}
+for a row-based expansion at row $c$ or
+\begin{equation}
+\det \mat{M} \bigg\rvert_{j=c} = \sum^{n}_{i = 1} (-1)^{i+c} a_{ic} \det( \mat{M}^{*}_{ic} \in \mat{M} )
+\end{equation}
+for a column-based expansion, given matrix $\mat{M} \in \mathbb{R}^{n \times n}$, and $\mat{M}^{*}_{ij}$ denotes a submatrix anchored by $(i,j)$, meaning that row $i$ and column $j$ are removed from $\mat{M}$ to produce $\mat{M}^{*}_{ij}$. 
+
+For example, for a $3 \times 3$ matrix $\mat{A}$,
+\begin{align*}
+\det \mat{A} \bigg\rvert_{i=1} 
+&= \sum_{j = 1}^{3} (-1)^{1+j} a_{1j} \det ( \mat{A}^{*}_{1j} \in \mat{A} ) \\
+&= a_{11} \det \begin{pmatrix}
+  a_{22} & a_{23} \\
+  a_{32} & a_{33}
+\end{pmatrix} -
+a_{12} \det \begin{pmatrix}
+  a_{21} & a_{23} \\
+  a_{31} & a_{33}
+\end{pmatrix} +
+a_{13} \det \begin{pmatrix}
+  a_{21} & a_{22} \\
+  a_{31} & a_{32}
 \end{pmatrix}
-\end{equation*} 
-where $i<j$. The gaussian elimination matrix would be
+\end{align*}
+\end{enumerate}
+
+\newpage
+\exercise{1(a)}
+
+\begin{align*}
+M_{41} &= \det \begin{pmatrix}
+  1 & 0 & 0 \\
+  2 & 1 & 0 \\
+  1 & 3 & 1
+\end{pmatrix}
+= \det \begin{pmatrix}
+  1 & 0 \\
+  3 & 1
+\end{pmatrix}
+ = 1 \\
+M_{42} &= \det \begin{pmatrix}
+  1 & 0 & 0 \\
+  1 & 1 & 0 \\
+  2 & 3 & 1
+\end{pmatrix}
+ = \det \begin{pmatrix}
+   1 & 0 \\
+   3 & 1
+\end{pmatrix}
+= 1 \\
+M_{43} &= \det \begin{pmatrix}
+  1 & 1 & 0 \\
+  1 & 2 & 0 \\
+  2 & 1 & 1
+\end{pmatrix}
+= \det \begin{pmatrix}
+  2 & 0 \\
+  1 & 1
+\end{pmatrix} -
+\det \begin{pmatrix}
+  1 & 0 \\
+  2 & 1
+\end{pmatrix}
+= 2 - 1 = 1 \\
+M_{44} &= \det \begin{pmatrix}
+  1 & 1 & 0 \\
+  1 & 2 & 1 \\
+  2 & 1 & 3
+\end{pmatrix}
+= \det \begin{pmatrix}
+  2 & 1 \\
+  1 & 3
+\end{pmatrix}
+- \det \begin{pmatrix}
+  1 & 1 \\
+  2 & 3
+\end{pmatrix}
+= 6 - 1 - (3 - 2) = 4
+\end{align*}
+
+\exercise{2(b)}
+
+\begin{align*}
+\det \mat{A} \bigg\rvert_{i=4} &= \sum_{j=1}^{4} (-1)^{4 + j} A_{4j} M_{4j} \\
+&= -A_{41} M_{41} + A_{42} M_{42} - A_{43} M_{43} + A_{44} M_{44} \\
+&= 4M_{44} - M_{43} = 4(4) - 1 = 15 
+\end{align*}
+
+\exercise{2(c)}
+
+\begin{align*}
+\det \mat{A} \bigg\rvert_{i=1} &= \sum^{4}_{j=1} (-1)^{1+j} A_{1j} M_{1j} \\
+&= M_{11} - M_{12} 
+= \det \begin{pmatrix} 2 & 1 & 0 \\ 1 & 3 & 1 \\ 0 & 1 & 4  \end{pmatrix}
+- \det \begin{pmatrix} 1 & 1 & 0 \\ 2 & 3 & 1 \\ 0 & 1 & 4  \end{pmatrix} \\
+&= 2 \det \begin{pmatrix} 3 & 1 \\ 1 & 4 \end{pmatrix} 
+- \det \begin{pmatrix} 1 & 1 \\ 0 & 4 \end{pmatrix} 
+- \det \begin{pmatrix} 3 & 1 \\ 1 & 4 \end{pmatrix}
++ \det \begin{pmatrix} 2 & 1 \\ 0 & 4  \end{pmatrix} \\
+&= 2 (11) - 4 - (11) + 8 = 15.
+\end{align*}
+
+\exercise{2(d)}
+
+\begin{align*}
+\det \mat{B} &= \det \begin{pmatrix} 1 & 1 & 0 \\ -1 & 3 & 1 \\ 0 & 1 & 4 \end{pmatrix} 
+= \det \begin{pmatrix} 3 & 1 \\ 1 & 4 \end{pmatrix}
+- \det \begin{pmatrix} -1 & 1 \\ 0 & 4 \end{pmatrix} \\
+&= 11 - (-4) = 15
+\end{align*}
+
+Because $\mat{P}$ is triangular,
+\begin{align*}
+\det \mat{P} = \prod_{i=1}^{n} P_{ii} = -15
+\end{align*}
+
+\exercise{2(e)}
+
 \begin{equation*}
-[\mat{E}_{swap}|\mat{I}_{m}] = \begin{pmatrix}
-\begin{tabular}{c|c}
-\begin{matrix}
-\vdots \\
-\va{I}_{m,r=j} \\
-\vdots \\
-\va{I}_{m,r=i} \\
-\vdots
-\end{matrix} &
-\begin{matrix}
-\vdots \\
-\va{I}_{m,r=i} \\
-\vdots \\
-\va{I}_{m,r=j} \\
-\vdots
-\end{matrix}
-\end{tabular}
-\end{pmatrix},
-\end{equation*} 
-so therefore, the corresponding inverse matrix would be
-\begin{equation*}
-\begin{pmatrix}
-\begin{tabular}{c|c}
-\begin{matrix}
-\vdots \\
-\va{I}_{m,r=i} \\
-\vdots \\
-\va{I}_{m,r=j} \\
-\vdots
-\end{matrix} &
-\begin{matrix}
-\vdots \\
-\va{I}_{m,r=j} \\
-\vdots \\
-\va{I}_{m,r=i} \\
-\vdots
-\end{matrix}
-\end{tabular}
-\end{pmatrix} = [ \mat{I}_{m}, \mat{E}_{swap} ],
+\mat{E}_{1} = \begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 1 & -4 \\
+  0 & 0 & 0 & 1
+\end{pmatrix} 
+\hspace{3em}
+\mat{E}_{2} = \begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 1 & 1 & 0 \\
+  0 & 0 & 0 & 1
+\end{pmatrix} 
+\hspace{3em}
+\mat{E}_{3} = \begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 0 & 1 \\
+  0 & 0 & 1 & 0
+\end{pmatrix}
 \end{equation*}
-thus showing that $\mat{E}_{swap}^{-1} = \mat{E}_{swap}$.
+
+\exercise{2(f)}
+
+As $\det \mat{AB} = \det \mat{A} \det \mat{B}$, then
+\begin{equation*}
+\det \mat{B} = \frac{ \det \mat{P} }{ \det \mat{E}_{1} \det \mat{E}_{2} \det \mat{E}_{3} } = \frac{15}{ (1)(1)(-1) } = -15
+\end{equation*}
+
+\section{Chapter 2: Invertibility}
+
+\subsection{Lab 7: Singularity}
+
+\notes
+
+\begin{enumerate}
+\item Given a linear system $\mat{A}x = \mat{B}$, if $\mat{A}$ is invertible, then the system has exactly one solution: $x = \mat{A}^{-1} \mat{B}$.
+\item If the constants in a linear system ($\mat{Ax = B}$) are all zero (i.e., $\mat{B = 0}$), we call the linear system a homogenous linear system, and these systems always have at least one solution: $\mat{x = 0}$.
+\end{enumerate}
+
+\exercise{2(a)}
+
+$\mat{A}$ is invertible because $\det \mat{A} \neq 0$. As
+$$\mat{A}^{-1} = 
+\begin{pmatrix} 
+  0 & -2 & 1 \\
+  \frac{1}{2} & 1 & -\frac{1}{2} \\
+  -\frac{1}{6} & 0 & \frac{1}{6}
+\end{pmatrix},$$
+then
+$$\mat{x} = \mat{A}^{-1}\mat{B} =
+\begin{pmatrix}
+-20 \\ 27/2 \\ -7/6
+\end{pmatrix}.$$
+
+\exercise{2(b)}
+
+Likewise, for $\mat{Ax} = \mat{0}, \mat{x} = \mat{0}$, the trivial solution.
+
+\theorem{17}{The inverse of a nonsingular upper triangular matrix is upper triangular.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be a nonsingular upper triangular matrix. Since $\mat{A}$ is invertible, there exists a matrix $\mat{A}^{-1}$ such that $\mat{A} \mat{A}^{-1} = \mat{I}$.
+
+Recall that the product of two upper triangular matrices is upper triangular. Moreover, the inverse of a nonsingular matrix is a product of elementary matrices. Among the elementary matrices, only those corresponding to row operations that preserve upper triangular form (scaling a row, adding a multiple of a row to another row above it, or swapping rows above the diagonal, which are disallowed in upper triangular matrices anyway) are involved in forming an upper triangular matrix.
+
+Since $\mat{A}$ is upper triangular, its Gaussian elimination to the identity matrix involves only upper triangular-preserving row operations. Therefore, the inverse $\mat{A}^{-1}$, being the product of the inverses of those elementary matrices, also consists of upper triangular matrices.
+
+Since a product of upper triangular matrices is upper triangular, it follows that $\mat{A}^{-1}$ is upper triangular.
+\end{proof}
+
+\theorem{18}{The inverse of a nonsingular diagonal matrix is diagonal.}
+
+\begin{proof}
+Let $\mat{A}$ be an invertible/nonsingular diagonal matrix. Therefore, $\mat{A} \in \mathbb{R}^{n \times n}$ and $\mat{A}$ can be expressed as the product of elementary matrices, $\mat{E}$. As $\mat{I}$ is diagonal, the only elementary operations that can occur within $\mat{E}$ must maintain the diagonal property (with any operations that violate this property at any point being later undone). Similarly, $\mat{A}^{-1} = \mat{E}^{-1}$, and as the inverse of an elementary product is an elementary product of the inverse operations, the diagonal property must be maintained through $\mat{E}^{-1}$ as well.   
+\end{proof}
+
+\theorem{19}{The determinant of the inverse is equal to the multiplicative inverse of the determinant, or $\det \mat{A}^{-1} = (\det \mat{A})^{-1}$.}
+
+\begin{proof}
+We use the multiplicative property of the determinant: for any \( n \times n \) matrices \( \mat{A} \) and \( \mat{B} \),
+\[
+\det(\mat{A} \mat{B}) = \det(\mat{A}) \cdot \det(\mat{B}).
+\]
+
+Suppose \( \mat{A} \) is an invertible \( n \times n \) matrix. Then \( \mat{A}^{-1} \mat{A} = \mat{I} \), where \( \mat{I} \) is the identity matrix. Taking the determinant of both sides, we get:
+\[
+\det(\mat{A}^{-1} \mat{A}) = \det(\mat{I}) = 1.
+\]
+
+Using the multiplicative property:
+\[
+\det(\mat{A}^{-1}) \cdot \det(\mat{A}) = 1.
+\]
+
+Solving for \( \det(\mat{A}^{-1}) \), we obtain:
+\[
+\det(\mat{A}^{-1}) = \frac{1}{\det(\mat{A})}.
+\]
+
+\end{proof}
+
+\theorem{20}{$\mat{A}$ is invertible if and only if $\mat{A}$ can be written as a product of elementary matrices.}
+
+\begin{proof}
+For $\mat{A}$ to be invertible, there must exist some matrix $\mat{E}$ as the product of elementary matrices such that $\mat{EA = I}$, with $\mat{E} = \mat{A}^{-1}$. Therefore, $\mat{A}^{-1}$ is a product of elementary matrices, and as the inverse of an elementary matrix is elementary, the inverse of the product of elementary matrices is also the product of elementary matrices. Therefore, as $\mat{A} = \mat{E}^{-1}$, $\mat{A}$ can be expressed as the prodct of elementary matrices.
+\end{proof}
+
+\theorem{21}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the system $\mat{Ax} = \mat{B}$ has exactly one solution for all $n \times 1$ vectors $\mat{B}$.}
+
+\begin{proof}
+By definition, for $\mat{Ax=B}$ to have $\ge 1$ solution, $\mat{A}$ must be either underrepresented ($n \times m$) or contradicting ($\det \mat{A} = 0$). Let $\mat{A} \in \mathbb{R}^{n \times n}$ be invertible. Therefore, $\mat{A}$ cannot contradict (meaning that, when represented as linear equations, the equations either state the same information or directly state conflicting information) as $\det \mat{A} \ne 0$. Additionally, as $\mat{A}$ is $n \times n$, $\mat{A}$ cannot be underrepresented: all values can be calculated. Therefore, $\mat{x}$ must have exactly one solution.
+\end{proof}
+
+\theorem{22}{If $\mat{A}$ is an $n \times n$ matrix and the system $\mat{Ax} = \mat{B}$ is consistent (has at least one solution) for all $n \times 1$ vectors $\mat{B}$, then $\mat{A}$ is invertible.}
+
+\begin{proof}
+As $\mat{Ax=B}$ is consistent, it cannot contain a contradiction (two of the internal linear equations stating conflicting information), because if there was a contradiction, $\mat{Ax=B}$ would yield no solutions and $\det \mat{A} = 0$, making $\mat{A}$ singular. Therefore, $\mat{A}$ must be invertible to have $\ge 1$ solution to $\mat{Ax = B}$.  
+\end{proof}
+
+\theorem{23}{If $ad - bc \neq 0$ then $\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{(ad - bc)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$.}
+
+\begin{proof}
+    This can be verified by direct calculation. Let $\mat{A} = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. By gaussian elimination:
+\begin{align*}
+  (\mat{A|I})
+= \begin{pmatrix} a & b & 1 & 0 \\ c & d & 0 & 1 \end{pmatrix}
+%
+&\xrightarrow{R_2 \leftarrow R_2 - \frac{c}{a} R_1}
+\begin{pmatrix}
+a & b & 1 & 0 \\
+0 & d - \frac{cb}{a} & -\frac{c}{a} & 1
+\end{pmatrix} \\
+%
+&\xrightarrow{\substack{R_1 \leftarrow \frac{1}{a} R_1 \\ R_2 \leftarrow \frac{a}{ad - bc} R_2}}
+\begin{pmatrix}
+1 & \frac{b}{a} & \frac{1}{a} & 0 \\
+0 & 1 & \frac{-c}{ad - bc} & \frac{a}{ad - bc}
+\end{pmatrix} \\
+%
+&\xrightarrow{R_1 \leftarrow R_1 - \frac{b}{a} R_2}
+\begin{pmatrix}
+1 & 0 & \frac{d}{ad - bc} & \frac{-b}{ad - bc} \\
+0 & 1 & \frac{-c}{ad - bc} & \frac{a}{ad - bc}
+\end{pmatrix}.
+\end{align*}
+Therefore,
+\begin{equation*}
+\mat{A}^{-1} =
+\begin{pmatrix}
+\frac{d}{ad - bc} & \frac{-b}{ad - bc} \\
+\frac{-c}{ad - bc} & \frac{a}{ad - bc}
+\end{pmatrix}
+= \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+\end{equation*}
+\end{proof}
+
+\theorem{24}{$\mat{A}$ is an $n \times n$ invertible matrix if and only if the system $\mat{Ax} = \mat{0}$ has only trivial solution.}
+
+\begin{proof}
+Suppose \( \mat{A} \in \mathbb{R}^{n \times n} \) is invertible. Then, by Theorem 21, for any \( \vec{b} \in \mathbb{R}^n \), the equation \( \mat{Ax} = \vec{b} \) has a unique solution. In particular, taking \( \vec{b} = \vec{0} \), the homogeneous equation \( \mat{Ax} = \vec{0} \) must also have a unique solution. Since \( \vec{x} = \vec{0} \) is always a solution to \( \mat{Ax} = \vec{0} \), it must be the only solution — the solution is trivial.
+
+Conversely, suppose the equation \( \mat{Ax} = \vec{0} \) has only the trivial solution \( \vec{x} = \vec{0} \). Then the null space of \( \mat{A} \) is trivial, so the columns of \( \mat{A} \) are linearly independent. For an \( n \times n \) matrix, linear independence of columns implies that \( \mat{A} \) has full rank \( n \), and hence is invertible.
+
+Therefore, \( \mat{A} \) is invertible if and only if the homogeneous equation \( \mat{Ax} = \vec{0} \) has only the trivial solution.
+\end{proof}
+
+\subsection{Lab 8: Modularity and $Z_{p}$}
+
+\notes
+
+\begin{enumerate}
+  \item If $x$ and $y$ are integers, they are said to be congruent modulo $p$ (written $x \equiv y \pmod{p}$), meaning that $\frac{x - y}{p}$ is an integer.
+\item $r = n \pmod{d}$ can be interpreted as the integer remainder of $n/d$ where $n, d$ and $r$ are all integers.
+\item $Z_{p}$ is the set of all integers that can result from $\pmod{p}$ (not considering congruency), and for integer value $p$, this set is all integers $Z_{p} = \{ 0, 1, \dots, p-2, p-1 \}$. 
+\end{enumerate}
+
+\exercise{1(a)}
+
+Given $Z_{5} = \{0, 1, 2, 3, 4 \}$, the corresponding additive inverses would be $(0, 4, 3, 2, 1)$ (as each indexwise matchup would thereby result in a modular congruency with 0, such as $1 + 4 \equiv 0 \pmod{5}$).
+
+\exercise{1(b)}
+
+The corresponding multiplicative inverses for $x \ge 0 \in Z_{5}$ would be $(\textit{undefined}, 1, 3, 2, 4)$, as, for example, the integer remainder of $\frac{4 \times 4}{5}$ is 1. 
+
+\exercise{2(a)}
+
+Let $\mat{A} = \begin{pmatrix} 1 & 2 \\ 1 & 1 \end{pmatrix}. \mat{A} \equiv \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} \pmod{2},$ thus $\det \mat{A} \pmod{2} \neq 0$, therefore $\mat{A}$ is invertible modulo 2. Similarly, $\mat{A} \pmod{5} = \mat{A}$ as all entries of $\mat{A} < 5$. Therefore, as $\det \mat{A} = \det \mat{A} \pmod{5} \ne 0, \mat{A}$ is invertible modulo 5.
+
+\exercise{2(b)}
+
+Let $\mat{A} = \begin{pmatrix} 1 & 2 \\ 1 & 1 \end{pmatrix}$ and $\mat{B} = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \pmod{2}.$ $\mat{A} \equiv \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} \pmod{2},$ so $\mat{A}^{-1} = \begin{pmatrix} 1 & 0 \\ -1 & 1 \end{pmatrix} \pmod{2}$, therefore
+\begin{equation*}
+\mat{x}\pmod{2} = \mat{A}^{-1} \mat{B}\pmod{2} = \begin{pmatrix} 4 \\ -3 \end{pmatrix} \pmod{2}.
+\end{equation*}
+Similarly, the calculation modulo 5 is just the standard calculation (as all values are $< 5$), so
+\begin{equation*}
+\mat{x}\pmod{5} = \mat{A}^{-1} \mat{B} = \begin{pmatrix} -10 \\ 17 \end{pmatrix} \equiv \begin{pmatrix} 0 \\ 2 \end{pmatrix} \pmod{5}.
+\end{equation*}
+
+\subsection{Lab 9: Complex Entries and Eigenvalues}
+
+\notes
+
+\begin{enumerate}
+\item Where a complex number is defined with a real and imaginary part in form $a + bi$, its complex conjugate will have the imaginary coefficient as the multiplicative inverse, $a - bi$.
+\item The complex conjugate of a matrix with complex entries has all of the entries of the matrix as the complex conjugates of the original matrix's entires.
+\item For an $n \times n$ matrix $\mat{A}$, the eigenvalues $\lambda$ of $\mat{A}$ are values of $\lambda$ which satisfy 
+\begin{equation}
+\mat{Ax} = \lambda \mat{x}
+\end{equation}
+for each eigenvalue's corresponding eigenvector $\mat{x}$, and the characteristic equation,
+\begin{equation}
+\det ( \mat{A} - \lambda \mat{I} ) = 0.
+\end{equation}
+\begin{enumerate}
+\item The eigenvalues of a diagonal matrix are just the entries along the diagonal.
+\item Singular matrices always have 0 as an eigenvalue, at least (they may have more).
+\item The eigenvalues of a matrix $\mat{M}$ are the same as the eigenvalues of its transposition $\mat{M}^{T}$:
+\begin{equation}
+\eig \mat{M} = \eig \mat{M}^{T}
+\end{equation}
+\item The eigenvalues of a complex-valued matrix $\mat{M}$ are the same as the eigenvalues of its complex transposition $\overline{\mat{M}}^{T}$:
+\begin{equation}
+\eig \mat{M} = \eig \mat{\overline{M}}^{T}
+\end{equation}
+\end{enumerate}
+\item A matrix $\mat{M}$ is considered ``Hermetian'' if it is equal to its complex transpose: $\mat{M} = \mat{\overline{M}}^{T}$.
+\item A matrix is considered ``Unitary'' if its complex transpose is its inverse: $\mat{M}^{-1} = \mat{\overline{M}}^{T}$.
+\end{enumerate}
+
+\theorem{25}{Determinants and complex conjugates are commutative, or the determinant of the complex conjugate is equal to the complex conjugate of the determinant. I.E.,
+\begin{equation*}
+\det \overline{\mat{A}} = \overline{\det \mat{A}}
+\end{equation*}.}
+
+\theorem{26}{If $\mat{A}$ is invertible, then inversion is commutative with the complex conjugate. I.E., 
+\begin{equation*}
+\left(\overline{\mat{A}}\right)^{-1} = \overline{\mat{A}^{-1}}
+\end{equation*}}
+
+\theorem{27}{If $c$ is a complex number, $\overline{c\mat{A}} = c\overline{\mat{A}}$.}
+
+\theorem{28}{The eigenvalues of a diagonal matrix are the entries on the diagonal.}
+
+\theorem{29}{All eigenvalues of Hermitian matrices are real numbers.}
+
+\theorem{30}{The complex conjugate of a Hermitian matrix is a Hermitian matrix.}
+
+\theorem{31}{$\mat{A}$ is Unitary if and only if $\mat{A}^{-1} = \ct{A}$}
+
+\theorem{32}{$\lambda$ is an eigenvalue of matrix $\mat{A}$ if and only if it is an eigenvalue of $\ct{A}$.}
+
+\subsection{Lab 10: Linear Combinations and Dependency}
+
+\notes
+
+\begin{enumerate}
+\item If $S = \{ \mat{v}_{1}, \mat{v}_{2}, \dots, \mat{v}_{n} \}$ is a set of vectors (or perhaps, equivalently, a vector of vectors, making $\mat{S}$ a matrix) and there exists scalars within some vector $\mat{k} = (k_{1}, k_{2}, \dots, k_{n})$ such that
+\begin{equation}
+\mat{w} = \sum_{i=1}^{n} k_{i} \mat{v}_{i} = \mat{Sk},
+\end{equation}
+then we say that $\mat{w}$ is a linear combination of all $\mat{v} \in \mat{S}$.
+\item For set $\mat{S} = \{ \mat{v}_{1}, \dots, \mat{v}_{n} \}$, $\mat{S}$ is linearly independent if
+\begin{equation}
+\mat{0} = \sum_{i=1}^{n} k_{i} \mat{v}_{i} = \mat{Sk}
+\end{equation}
+has only the trivial solution, $\mat{k = 0}$. Otherwise, it's linearly dependent, meaning that some nonzero value of $\mat{k}$ can result in $\mat{w=0}$.
+\item A set of vectors $\mat{S}$ is said to span a vector space $\mat{V}$ if every vector in $\mat{V}$ can be expressed as a linear combination of all of the vectors in $\mat{S}$.
+\begin{enumerate}
+\item A common example is dimensionality, like $\mathbb{R}^{1}, \mathbb{R}^{2}, \mathbb{R}^{3}, \mathbb{R}^{n}, \mathbb{R}^{n \times n}, \dots$. 
+\item The set $\mat{S}_{1} = \{1\}$ spans $\mathbb{R}^{1}$ as all numbers can be written as a product with 1.
+\item Similarly, $\mat{S}_{2} = \{(1,0), (0,1)\}$ spans $\mathbb{R}^{2}$ because all vectors within two dimensions can be described as a linear combination of the two.
+\end{enumerate}
+\end{enumerate}
+
+\theorem{33}{If $\mat{A}$ is invertible, then the rows of $\mat{A}$ are linearly independent.}
+
+\theorem{34}{If $\mat{A}$ is invertible, then the columns of $\mat{A}$ are linearly independent.}
+
+\theorem{35}{A set of vectors with only two vectors in it is linearly dependent if one is a scalar multiple of the other.}
+
+\theorem{36}{A set of vectors is linearly dependent if it contains the zero vector.}
+
+\theorem{37}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the rows of $\mat{A}$ span $\mathbb{R}^{n}$.}
+
+\theorem{38}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the columns of $\mat{A}$ span $\mathbb{R}^{n}$}
 
 \end{document}
