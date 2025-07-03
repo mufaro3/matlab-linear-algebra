@@ -3,3 +3,5 @@ Selected MATLAB practice from "Exploring linear Algebra: Labs and Projects with 
 Note: all projects are designed to be run using GNU Octave, NOT MATLAB (not buying a license). To run file 'ch1_matrices/lab0.m', call
 
 $ octave ch1_matrices/lab0.m
+
+from the root directory. Additionally, all of the notes and solutions and whatnot are under a PDF file called the 'companion.'
