@@ -9,4 +9,6 @@
 \contentsline {subsection}{\numberline {2.1}Lab 7: Singularity}{15}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Lab 8: Modularity and $Z_{p}$}{19}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Lab 9: Complex Entries and Eigenvalues}{20}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Lab 10: Linear Combinations and Dependency}{22}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Lab 10: Linear Combinations and Dependency}{26}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Chapter 3: Vector Spaces}{29}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Lab 11: Vector Spaces and Subspaces}{29}{subsection.3.1}%

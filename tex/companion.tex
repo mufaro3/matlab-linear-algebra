@@ -6,10 +6,12 @@
 \newcommand{\mat}[1]{\mathbf{#1}}
 \newcommand{\exercise}[1]{\textbf{EXERCISE #1}\label{#1}}
 \newcommand{\theorem}[2]{\textbf{THEOREM #1.} #2}
+\newcommand{\conjecture}[1]{\textbf{CONJECTURE:} #1}
 \newcommand{\notes}{\textbf{NOTES}}
 \newcommand{\rref}{\text{RREF}}
 \newcommand{\eig}{\text{eig }}
 \newcommand{\ct}[1]{\mat{\overline{#1}}^{T}}
+\newcommand{\subtheorem}[1]{\textbf{SUBTHEOREM:} #1}
 
 \begin{document}
 
@@ -791,27 +793,181 @@ for each eigenvalue's corresponding eigenvector $\mat{x}$, and the characteristi
 \item A matrix is considered ``Unitary'' if its complex transpose is its inverse: $\mat{M}^{-1} = \mat{\overline{M}}^{T}$.
 \end{enumerate}
 
+\exercise{2(a)}
+
+Let $\mat{A} = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$. $\eig \mat{A} = \{ \lambda \}$ where
+\begin{align*}
+\det(\mat{A} - \lambda \mat{I}) 
+&= \det \begin{pmatrix} 2 - \lambda & 0 \\ 0 & 3 - \lambda \end{pmatrix} \\
+&= (2-\lambda)(3-\lambda) = 0 \\
+\end{align*}
+$\therefore \eig \mat{A} = \{ 2,3 \}$, which is the values on the diagonal.
+
+\exercise{2(b)}
+
+\conjecture{The eigenvalues of any diagonal matrix are the values along the main diagonal.}
+
+\begin{proof}
+The eigenvalues must be the values along the main diagonal, as if any of these values were to become 0, the matrix would become singular. This is because of the telescoping property of the determinant, in that for any diagonal matrix $\mat{M} \in \mathbb{R}^{n \times n}$,
+\begin{equation*}
+\det \mat{M} = \prod_{i = 0}^{n} \mat{M}_{ii},
+\end{equation*}
+thus if any of these values is 0, $\det \mat{M} = 0$, breaking invertibility.
+\end{proof} 
+
+\exercise{2(c)}
+
+Let $\mat{A} = \begin{pmatrix} 1 & 4 \\ 2 & 3 \end{pmatrix}$.
+\begin{align*}
+\det (\mat{A} - \lambda \mat{I})
+&= \det \begin{pmatrix} 1 - \lambda & 4 \\ 2 & 3 - \lambda \end{pmatrix} \\
+&= (1 - \lambda)(3 - \lambda) - 8 \\
+&= \dots \\
+&= (\lambda - 5)(\lambda + 1) = 0 \\
+\det (\mat{A}^{T} - \lambda \mat{I})
+&= \det \begin{pmatrix} 1 - \lambda & 2 \\ 4 & 3 - \lambda \end{pmatrix} \\
+&= \dots \\
+&= (\lambda - 5)(\lambda + 1) = 0
+\end{align*}
+$\therefore \eig \mat{A} = \eig \mat{A}^{T} = \{ -1, 5 \}$.
+
+\exercise{2(d)}
+
+As
+\begin{equation*}
+\mat{A} = \begin{pmatrix} 1 & -i \\ 2i & i \end{pmatrix}, \hspace{2em} \text{ and } \hspace{2em} \ct{A} = \begin{pmatrix} 1 & -2i \\ i & -i \end{pmatrix},
+\end{equation*}
+As $\eig \mat{A} = \{\lambda: \det(\mat{A} - \lambda \mat{I}) = 0 \}$, $\eig \mat{A} = \eig \ct{A} = \{ \frac{1 - i \pm \sqrt{8 - 6i} }{2}  \}$. 
+
+This is similar to the properties seen in example 1(c), as the transposition alters the order of elements in such a way that for real numbers, this makes no change to the determinant, but for complex values, the sign will be altered ($\det \mat{A} = \det \mat{A}^{T}$ holds true for the matrix of real values $\mat{A}$ but not for a complex-valued matrix). Therefore, the complex conjugate needs to be taken to fix alter the signs such that it's once again equivalent.
+
+\exercise{2(e)}
+
+An example of a hermitian matrix with complex entries would be
+\begin{equation*}
+\mat{H} = \begin{pmatrix} 1 & 2-i \\ 2+i & 1 \end{pmatrix}.
+\end{equation*}
+
+\exercise{2(f)}
+
+\conjecture{Where $\mat{A}$ is Hermitian, $\eig \mat{A} = \eig \ct{A}$.}
+
+\begin{proof}
+$\mat{A}$ is Hermitian, so $\mat{A} = \ct{A}$.
+\end{proof}
+
+\exercise{2(g)}
+
+An example of a unitary matrix is
+\begin{equation*}
+\mat{U} = \frac{1}{\sqrt{2}}  \begin{pmatrix} i & -1 \\ 1 & -i \end{pmatrix}.
+\end{equation*}
+
+\exercise{2(h)}
+
+\conjecture{The eigenvalues of the complex transpose of a unitary matrix are the inverses of the eigenvalues of the matrix ($\eig \mat{U} = (\eig \mat{U}^{-1})^{-1}$).}
+
+\begin{proof}
+As $\det \mat{A}^{-1} = (\det \mat{A})^{-1}$ for any $\mat{A} \in \mathbb{R}^{n \times n}$, $\eig \mat{A}^{-1} = (\eig \mat{A})^{-1}$. Therefore, for any unitary matrix $\mat{U} \in \mathbb{R}^{n \times n}$, as $\mat{U}^{-1} = \ct{U}$, $\eig \mat{U} = (\eig \ct{U})^{-1}$.
+\end{proof}
+
 \theorem{25}{Determinants and complex conjugates are commutative, or the determinant of the complex conjugate is equal to the complex conjugate of the determinant. I.E.,
 \begin{equation*}
 \det \overline{\mat{A}} = \overline{\det \mat{A}}
 \end{equation*}.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}.$ $\det \mat{A}$ is expressed as a combination of the values of $\mat{A}$ via multiplication and division in form
+\begin{equation*}
+\det \mat{A} = a_{11} ( a_{22} \det (\dots) - a_{23} \det (\dots) + \dots ) - a_{12} ( a_{21} \det(\dots) - \dots ) + \dots,
+\end{equation*}
+and as taking the complex conjugate is commutative with addition and multiplication (and thus subtraction and division)
+\begin{equation*}
+\overline{ab} = \overline{a} \times \overline{b} \hspace{2em} \overline{a+b} = \overline{a} + \overline{b},
+\end{equation*}
+taking the complex conjugate of the determinant is equivalent to calculating the determinant with the complex conjugate of each of the internal values: 
+\begin{equation*}
+\overline{\det \mat{A}} = \overline{a_{11}} ( \overline{a_{22}} \det (\dots) - \overline{a_{23}} \det (\dots) + \dots ) - \overline{a_{12}} ( \overline{a_{21}} \det(\dots) - \dots ) + \dots,
+\end{equation*}
+which would be the same as taking the determinant of the complex conjugate of $\mat{A}$, or
+\begin{equation*}
+\overline{\det \mat{A}} = \det \overline{\mat{A}}.
+\end{equation*}
+\end{proof}
 
 \theorem{26}{If $\mat{A}$ is invertible, then inversion is commutative with the complex conjugate. I.E., 
 \begin{equation*}
 \left(\overline{\mat{A}}\right)^{-1} = \overline{\mat{A}^{-1}}
 \end{equation*}}
 
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be an invertible matrix, implying that $\mat{A}$ can be expressed as the product of elementary matrices $\mat{E}$. Similarly, $\mat{A}^{-1}$ is expressed as the $\mat{E}^{-1}$, the the product of the inverse elementary operations comprising $\mat{A}$, and because the values that comprise $\mat{A}^{-1}$ can be expressed as the inverses of the elementary operations comprising $\mat{A}$, the values of $\mat{A}^{-1}$ can be expressed as combinations of the elements of $\mat{A}$ using basic operations: addition, subtraction, multiplication, and division. Because taking the complex conjugate applied before or after any basic operation yields the same result, taking the complex conjugate before or after taking the inverse will yield the same value. 
+\end{proof}
+
 \theorem{27}{If $c$ is a complex number, $\overline{c\mat{A}} = c\overline{\mat{A}}$.}
+
+\begin{proof}
+This is untrue as for any complex scalar $c$ and matrix $\mat{A} \in \mathbb{R}^{m \times n}$, because as scalar multiplication is distributed across all elements, and as for any two complex-valued numbers $a$ and $b$, $\overline{ab} \ne a \overline{b}$ Therefore, $\overline{c} \times \overline{\mat{M}}$
+\end{proof}
 
 \theorem{28}{The eigenvalues of a diagonal matrix are the entries on the diagonal.}
 
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be a diagonal matrix.
+\begin{equation*}
+\det \mat{A} = \prod_{i=1}^{n} A_{ii}.
+\end{equation*}
+Thus, if any value in $\{A_{11}, \dots, A_{nn}\}$ is 0, $\det \mat{A} = 0$, breaking invertbility. Therefore, all values of the main diagonal are eigenvalues, as all values satisfy
+\begin{equation*}
+\det( \mat{A} - \lambda \mat{I} ) = 0
+\end{equation*} 
+\end{proof}
+
 \theorem{29}{All eigenvalues of Hermitian matrices are real numbers.}
+
+% SHAMELESSLY COPIED FROM CHATGPT!
+%
+% I genuinely did not know how to prove this.
+
+\begin{proof}
+Let \( \mat{H} \in \mathbb{C}^{n \times n} \) be a Hermitian matrix, so \( \mat{H} = \mat{H}^\dagger \), meaning \( \mat{H} \) equals its conjugate transpose.
+
+Suppose \( \lambda \in \mathbb{C} \) is an eigenvalue of \( \mat{H} \) with corresponding (nonzero) eigenvector \( \va{x} \in \mathbb{C}^n \), so:
+\[
+\mat{H} \va{x} = \lambda \va{x}.
+\]
+
+Take the Hermitian inner product of both sides with \( \vec{x} \):
+\[
+\ct{x} \mat{H} \va{x} = \ct{x} (\lambda \va{x}) = \lambda \ct{x} \va{x}.
+\]
+
+Now, note two facts:
+\begin{enumerate}
+    \item \( \ct{x} \mat{H} \va{x} \) is a \textbf{real number}, because \( \mat{H} \) is Hermitian.
+    \item \( \ct{x} \va{x} \) is real and positive, since \( \va{x} \ne 0 \).
+\end{enumerate}
+
+Therefore, \( \lambda \ct{x} \va{x} \) is real, which implies that \( \lambda \) must be real.
+\end{proof}
 
 \theorem{30}{The complex conjugate of a Hermitian matrix is a Hermitian matrix.}
 
+\begin{proof}
+Let $\mat{H} \in \mathbb{R}^{n \times n}$ be a hermitian matrix. Therefore, $\mat{H} = \ct{H}$.
+\end{proof}
+
 \theorem{31}{$\mat{A}$ is Unitary if and only if $\mat{A}^{-1} = \ct{A}$}
 
+\begin{proof}
+This is true by the definition of a unitary matrix, as to be unitary, $\mat{M} \ct{M} = \ct{M} \mat{M} = \mat{I}$, and similarly, $\mat{M} \mat{M}^{-1} = \mat{M}^{-1} \mat{M} = \mat{I}$, therefore, $\mat{M}^{-1} = \ct{M}$ by the associative property.
+\end{proof}
+
 \theorem{32}{$\lambda$ is an eigenvalue of matrix $\mat{A}$ if and only if it is an eigenvalue of $\ct{A}$.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$. As $\det \mat{A} = \det \ct{A}$, then therefore, $\det(\mat{A} - \lambda \mat{I}) = \det(\ct{A} - \lambda \mat{I})$ as $\ct{\mat{A} - \lambda \mat{I}} = \ct{A} - \overline{\lambda} \mat{I}$. Therefore, as $\eig \mat{A} = \{ \lambda | \det(\mat{A} - \lambda \mat{I}) = 0 \}, \eig \mat{A} = \eig \ct{A}$ and vice versa.
+\end{proof}
 
 \subsection{Lab 10: Linear Combinations and Dependency}
 
@@ -838,14 +994,60 @@ has only the trivial solution, $\mat{k = 0}$. Otherwise, it's linearly dependent
 
 \theorem{33}{If $\mat{A}$ is invertible, then the rows of $\mat{A}$ are linearly independent.}
 
+\begin{proof}
+For $\mat{A}$ to be invertible, it must satisfy $\mat{EA=I}$ for some product of elementary matrices $\mat{E}$ where $\mat{E}=\mat{A}^{-1}$, allowing $\mat{A}$ to reduce down to $\mat{I}$. As the rows of $\mat{I}$ are clearly linearly independent and all valid elementary operations (scalar multiplication, scalar addition, and swapping) can only produce linearly independent matrices, all elementary matrices and subsequent elementary products must be likewise linearly independent, including $\mat{A}$, which must be expressible as a product of elementary operations.    
+\end{proof}
+
 \theorem{34}{If $\mat{A}$ is invertible, then the columns of $\mat{A}$ are linearly independent.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$. Suppose $\mat{A}$ has linearly dependent columns in form such that for some column vector $\mat{k} \neq \mat{0}$, $\mat{Ak} = \mat{0}$. To be invertible, $\mat{A}$ must satisfy
+$$\mat{A}^{-1}\mat{A} = \mat{I},$$
+so if we multiply by $\mat{k}$ on both sides, knowing that $\mat{Ik}=\mat{k}$, we obtain
+$$\mat{A}^{-1} \mat{0} = \mat{k}$$
+or
+$$\mat{k} = \mat{0},$$
+a contradiction. Therefore, to be invertible, the columns of $\mat{A}$ must be linearly independent.
+\end{proof}
 
 \theorem{35}{A set of vectors with only two vectors in it is linearly dependent if one is a scalar multiple of the other.}
 
+\begin{proof}
+True by definition. Let $S = \{ \mat{x}, s\mat{x} \}$. For $\mat{k} = ( -s, 1 ), -s\mat{x}+s\mat{x} = \mat{0}$.
+\end{proof}
+
 \theorem{36}{A set of vectors is linearly dependent if it contains the zero vector.}
 
-\theorem{37}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the rows of $\mat{A}$ span $\mathbb{R}^{n}$.}
+\begin{proof}
+This is not true. For example, consider $S=\{ (0,0), (0,1), (1,0) \}$. Despite containing the zero vector $\mat{0}=(0,0)$, there is no $\mat{k}$ such that $\mat{Sk=0}$ where $\mat{k} \ne \mat{0}$.
+\end{proof}
 
-\theorem{38}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the columns of $\mat{A}$ span $\mathbb{R}^{n}$}
+\theorem{37 and 38}{If $\mat{A}$ is an $n \times n$ invertible matrix, then the rows and columns of $\mat{A}$ span $\mathbb{R}^{n}$.}
+
+\begin{proof}
+As shown, for $\mat{A}$ to be invertible, the set of vectors representing its rows or its columns must be each linearly independent, containing exactly $n$ vectors of size $n$. Therefore, as any set of $n$ linearly independent vectors of size $n$ can span $\mathbb{R}^{n}$, the rows and columns of $\mat{A}$ span $\mathbb{R}^{n}$.    
+\end{proof}
+
+\subtheorem{Any set of $n$ linearly independent vectors of size $n$ can span $\mathbb{R}^{n}$.}
+
+\begin{proof}
+Let $S = \{ \mat{v}_1, \mat{v}_2, \ldots, \mat{v}_n \} \subset \mathbb{R}^n$ be a set of $n$ linearly independent vectors.
+
+The dimension of $\mathbb{R}^n$ is $n$, meaning any basis of $\mathbb{R}^n$ must consist of exactly $n$ vectors.
+
+Since $S$ has $n$ linearly independent vectors, it satisfies the definition of a basis. Therefore, $S$ spans $\mathbb{R}^n$.
+\end{proof}
+
+\section{Chapter 3: Vector Spaces}
+
+\subsection{Lab 11: Vector Spaces and Subspaces}
+
+\notes
+
+\begin{enumerate}
+\item A vector space is a non-empty set of vectors on which some form of vector addition and multiplication are defined (essentially, a set of vectors defined with a special set of rules for manipulating them). 
+\item Dimensional vector space notation is $\mathbb{R}^{n}$, where $n$ is the length of the enclosed vectors.
+\item
+\end{enumerate}
 
 \end{document}
