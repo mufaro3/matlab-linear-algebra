@@ -11,7 +11,13 @@
 \newcommand{\rref}{\text{RREF}}
 \newcommand{\eig}{\text{eig }}
 \newcommand{\ct}[1]{\mat{\overline{#1}}^{T}}
+\newcommand{\nullsp}{\text{null }}
+\newcommand{\nullility}{\text{nulllility }}
+\newcommand{\rowsp}{\text{rowsp }}
+\newcommand{\colsp}{\text{colsp }}
 \newcommand{\subtheorem}[1]{\textbf{SUBTHEOREM:} #1}
+\newcommand{\basis}{\text{basis }}
+\newcommand{\set}[2]{\left\{\left.#1\right|#2\right\}}
 
 \begin{document}
 
@@ -1047,7 +1053,138 @@ Since $S$ has $n$ linearly independent vectors, it satisfies the definition of a
 \begin{enumerate}
 \item A vector space is a non-empty set of vectors on which some form of vector addition and multiplication are defined (essentially, a set of vectors defined with a special set of rules for manipulating them). 
 \item Dimensional vector space notation is $\mathbb{R}^{n}$, where $n$ is the length of the enclosed vectors.
-\item
+\item Vector subspaces are nonempty subsets of vector spaces, essentially special sets of vectors for which the following three categories are met:
+\begin{enumerate}
+\item It contains the zero vector (the additive identity).
+\item It's closed under scalar multiplication, meaning that for any vector $\mat{v} \in W$ in subspace $W \in S$ in space $S$, all scalar multiples of $\mat{v}$ are in $W$: $k\mat{v} \in W$.
+\item It's closed under vector addition, again meaning that for any two vectors $\mat{v}$ and $\mat{u}$, $\mat{v} + \mat{u} = \mat{u} + \mat{v} \in W$. 
 \end{enumerate}
+\end{enumerate}
+
+\exercise{1(a)} $\va{u} + \va{v} = (2,2) \in V.$
+
+\exercise{1(b)} Yes, $\va{0}$.
+
+\exercise{1(c)} No. $\va{u} + \va{v} \ne \va{v} + \va{u}$.
+
+\exercise{1(d)} $ku = \begin{pmatrix} 4 & 0 \\ 0 & 16 \end{pmatrix} \in V$.
+
+\exercise{1(e)} $\va{0}$.
+
+\exercise{1(f)} $1\mat{v} = \begin{pmatrix} v_{1} & 0 \\ 0 & v_{4} \end{pmatrix}$
+
+\exercise{1(g)} No. $1\mat{v} \ne \mat{v}$
+
+\exercise{1(h)} $\mathbb{R}^{n}$. Standard multiplication and addition.
+
+\exercise{1(i)} $V = \mathbb{R}^{n}$. Standard addition. For $\va{u} \in V$ and $k \in \mathbb{R}$, let $k\va{u} = \va{0}$.
+
+\exercise{2(a)} $W \in M_{2 \times 2} = \left\{ \left. \begin{pmatrix} x & 0 \\ 0 & y \end{pmatrix} \right| x,y \in \mathbb{R} \right\}$.
+
+\exercise{2(b)}
+
+The general solution set is $S \in \mathbb{R}^{2} = \left\{ \left. \begin{pmatrix} -2x \\ x \end{pmatrix} \right| x \in \mathbb{R} \right\}$. It's closed under addition and multiplication, because for all $\va{a}, \va{b} \in S,$ $\va{a} + \va{b} \in S$ and for all $k \in \mathbb{R}$, $k\va{a} \in S$, including $\va{0}$. Therefore, $S$ is a subspace of $\mathbb{R}^{2}$.
+
+\exercise{2(c)}
+
+Let $V = \left\{\left. f(x) \right| f(x) \ne \text{undefined}, x \in \mathbb{R} \right\}$ and $f(x), g(x) \in S$ be continuous functions defined over $\mathbb{R}$. As any linear combinations of $f(x)$ and $g(x)$ is still continuous, any linear combinations of the elements in $V$ is still in $V$, including $4+5\cos(x)$. Additionally, let 
+$$S \in V = \left\{ \left. c_{1} + c_{2} \cos(x) + c_{3} \sin(x) \right| c_1, c_2, c_3 \in \mathbb{R} \right\}$$
+be the set of all linear combinations of $1, \cos(x),$ and $\sin(x)$, for which, each element $f(x) \in S$ can be represented by its associated vector of constants 
+$$\va{c}_{f(x)} = (c_1, c_2, c_3),$$
+as there is a direct mapping between any constant vector $\va{c} \in \mathbb{R}^{3}$ and its corresponding linear combination function $f(x)$. Therefore, as $\mathbb{R}^{3}$ is closed under addition and scalar multiplication, so is $S$.
+
+\theorem{39}{If $V$ is the set of $2 \times 2$ invertible matrices, then $V$ is a vector space under matrix addition and scalar multiplication of matrices.}
+
+\begin{proof}
+Untrue. $V$ is not closed under matrix addition. $\mat{I}, -\mat{I} \in V$ but $\mat{I} + (-\mat{I}) = \mat{0} \not\in V$.
+\end{proof}
+
+\theorem{40}{The set of $2 \times 2$ symmetric matrices under matrix addition and scalar multiplication of matrices is a vector space.}
+
+\begin{proof}
+Let $V \in M_{2 \times 2}$ be the set of symmetric $2 \times 2$ matrices. Let $\mat{A},\mat{B} \in V$. By rules of symmetry, $\mat{A+B}$ is symmetric, so $\mat{A+B} \in S$. Additionally, by rules of symmetry, for scalar $k \in \mathbb{R}$, $k\mat{A} \in S$. Therefore, $V$ is a vector space. 
+\end{proof}
+
+\theorem{41}{If $V$ is a vector space with $\va{u}_1$ and $\va{u}_2$ vectors in $V$ then $a_1 \va{u}_1 + a_2 \va{u}_2 + b_1 \va{u}_1 + b_{2} \va{u}_{2} = (a_1 + b_1) \va{u}_1 + (a_2 + b_2) \va{u}_2$ and for any scalars $a_1, a_2, b_1, b_2$.}
+
+\begin{proof}
+Where $V$ is a vector space, $\va{u}_{1} + \va{u}_{2} = \va{u}_{2} + \va{u}_{1}$ and $k\va{u} = (ku_{1}, ku_{2}, \dots, ku_n)$ for any scalar $k$. Therefore, scalar multiplication can be written distributively, $(a+b)\va{u} = a\va{u} + b\va{u}$, and vector addition can be written commutatively. Thus, the assertion is true.
+\end{proof}
+
+\theorem{42}{If $\mat{A}$ is an $n \times n$ matrix, then the solution set to $Ax = 0$ is a subspace of $\mathbb{R}^{n}$.}
+
+\begin{proof}
+Let $S \in \mathbb{R}^{n} = \left\{\left. \mat{x} \right| \mat{Ax} = 0 \right\}.$ If $\mat{A}$ is invertible, $S = \{\va{0}\}$, which is a valid vector space (the only valid single-item vector space). Where $\mat{A}$ is singular, $S$ will be infinitely large. Let $\va{a}, \va{b} \in S$. $k\va{a} \in S$ be solutions. Because a scalar multiplied anywhere in the chain of matrix multiplication produces the same matrix (see below), $\mat{A}(k\mat{a}) = k(\mat{Aa}) = \mat{0} \in S$. 
+
+Furthermore, all solutions $\mat{x} \in S$ are based on relationships between the values of $\mat{x}$, in such a way that $\mat{x}$ can be described internally as a series of base values,
+$$\mat{x} = ( x_1, x_2, \dots, x_n ),$$
+and all $\mat{v} \in \mat{S}$ must essentially be a scalar multiple of these base values (or in other words, all vectors in $S$ are scalar multiples of each other). Therefore, for any two vectors $\mat{a}$ and $\mat{b}$ in $S$, $\mat{a+b} \in S$. Therefore, $S$ is a subspace of $\mathbb{R}^{n}$. 
+\end{proof}
+
+\subtheorem{$k\mat{A} \mat{B} = \mat{A} k \mat{B}$}
+
+\begin{proof}
+Scalar multiplication is element-wise and distributed over the entire matrix, so it can occur before or after matrix multiplication. 
+\end{proof}
+
+\theorem{43}{If $\mat{A}$ is an $n \times n$ matrix, then the set of linear combinations of the rows of $\mat{A}$ is a subspace of $\mathbb{R}^{n}$.}
+
+\begin{proof}
+Let $\va{v}, \va{u} \in \mat{A}$, $S \in \mathbb{R}^{n}$ be the set of linear combinations of rows in $\mat{A}$, and $k \in \mathbb{R}$ be a scalar. $S$ is closed under addition as $\va{v} + \va{u} = \va{u} + \va{v} \in S$. Additionally, $S$ is closed under scalar multiplication, as all $k\va{u} \in S$. Therefore, $S$ is a subspace of $\mathbb{R}^{n}$.
+\end{proof}
+
+\theorem{44}{If $S = \{ \va{v}_1, \va{v}_2, \dots, \va{v}_n \}$ is a set of vectors in vector space $V$, then the set of all linear combinations of vectors in $S$ is a subspace of $V$.}
+
+\begin{proof}
+Let $W$ be the set of linear combinations of vectors in $S$, $\va{v}, \va{u} \in S$ and $k \in \mathbb{R}$ be a scalar. As $V$ is a vector space, any $k\mat{v}$ or $\va{v} + \va{u}$ are in $W$, and therefore, in $V$. As $W$ is closed under addition and scalar multiplication, $W$ is a subspace of $V$.
+\end{proof}
+
+\subsection{Lab 12: Basis Vectors, Null Space, Rank, Column/Rowspace}
+
+\notes
+
+\begin{enumerate}
+\item Where a set of vectors $S$ spans a vector space $V$ if all vectors in $V$ can be written as a linear combination of vectors in $S$, $S$ acts as a basis for $V$ (and the vectors of $S$ are basis vectors of $V$).
+\begin{enumerate}
+\item An example is the cardinal vectors, $(0,1,0), (1,0,0),$ and $(0,0,1)$, which act as basis vectors for $\mathbb{R}^{3}$.
+\end{enumerate}
+\item The dimension of a vector space (written $\dim V$) is the number of vectors that form its basis set. If the vector space $V$ consists only of $\mat{0}$, then $\dim V = 0$.
+\begin{enumerate}
+\item If the number of basis vectors is finite, $V$ is called ``finite dimensional.'' If the number if infinite, $V$ is ``infinite dimensional.''
+\end{enumerate}
+\item A basis for a vector space is not unique, a vector space can have multiple bases. However, all basis sets for the same vector space must contain the same number of vectors (the dimensionality of the basis).
+\item If two vector spaces have the same basis, they are in the same vector space.
+\item For a given matrix/vector $\mat{A}$, the solution set $S$ to $\mat{Ax=0}$ is known as the nullspace of $\mat{A}$ and the dimension of this null space $\dim S$ is known as the nullility of $\mat{A}$.
+\begin{enumerate}
+\item The nullspace is considered empty if the only valid solution is the trivial solution, $\mat{x=0}$.
+\item The dimension of the nullspace is considered the nullility of the matrix, $\dim (\text{null } \mat{A}) = \text{nullility } \mat{A}$
+\end{enumerate}
+\item The rowspace/columnspace of a matrix is the set of all linear combinations from the rows/columns of the matrix:
+\begin{gather}
+\rowsp \mat{A} = \set{ \sum_{i=1}^{n} k_{i} \va{r}_{i\mat{A}} }{ \va{k} \in \mathbb{R}^{n} }. \\
+\colsp \mat{A} = \set{ \sum_{i=1}^{n} k_{i} \va{c}_{i\mat{A}} }{ \va{k} \in \mathbb{R}^{n} }.
+\end{gather}
+\item The dimensionality of the rowspace or columnspace is called the ``rank'' of the matrix: 
+\begin{equation}
+\rank \mat{A} = \dim( \rowsp \mat{A} ) = \dim( \colsp \mat{A} )
+\end{equation}
+and it's defined as the maximum number of linearly independent rows or columns in $\mat{A}$.
+\begin{enumerate}
+\item The rowspace and columnspace of an $n \times n$ invertible matrix must span $\mathbb{R}^{n}$.
+\item Basis vectors of the rowspace of $\mat{A}$ are simply the nonzero row vectors of $\rref( \mat{A} )$, and the basis vectors of the columnspace of $\mat{A}$ are the original columns of $\mat{A}$ corresponding to the columns containing leading ones in $\rref( \mat{A} )$.
+\end{enumerate}
+\end{enumerate}
+
+\exercise{1(a)} $\{ (0,0,1), (0,1,0), (1,0,0), (1,1,1) \}$
+
+\exercise{1(b)} $\{ (0,0,1), (0,1,0) \}$
+
+\exercise{1(c)} $\{ (0,0,2), (0,2,0), (2,0,0) \}$
+
+\exercise{1(d)} $\dim \mathbb{R}^{n} = n$
+
+\exercise{2(a)} $\basis \null \mat{A} = \left\{ \begin{pmatrix} -2 \\ 1 \end{pmatrix} \right\}$
+
+\exercise{2(b)} 
 
 \end{document}
