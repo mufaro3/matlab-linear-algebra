@@ -18,6 +18,7 @@
 \newcommand{\subtheorem}[1]{\textbf{SUBTHEOREM:} #1}
 \newcommand{\basis}{\text{basis }}
 \newcommand{\set}[2]{\left\{\left.#1\right|#2\right\}}
+\newcommand{\vspan}{\text{span }}
 
 \begin{document}
 
@@ -1173,6 +1174,10 @@ and it's defined as the maximum number of linearly independent rows or columns i
 \item The rowspace and columnspace of an $n \times n$ invertible matrix must span $\mathbb{R}^{n}$.
 \item Basis vectors of the rowspace of $\mat{A}$ are simply the nonzero row vectors of $\rref( \mat{A} )$, and the basis vectors of the columnspace of $\mat{A}$ are the original columns of $\mat{A}$ corresponding to the columns containing leading ones in $\rref( \mat{A} )$.
 \end{enumerate}
+\item For a matrix $\mat{A} \in \mathbb{R}^{m \times n}$,
+\begin{equation}
+n = \rank \mat{A} + \nullility \mat{A}
+\end{equation}
 \end{enumerate}
 
 \exercise{1(a)} $\{ (0,0,1), (0,1,0), (1,0,0), (1,1,1) \}$
@@ -1183,8 +1188,67 @@ and it's defined as the maximum number of linearly independent rows or columns i
 
 \exercise{1(d)} $\dim \mathbb{R}^{n} = n$
 
-\exercise{2(a)} $\basis \null \mat{A} = \left\{ \begin{pmatrix} -2 \\ 1 \end{pmatrix} \right\}$
+\exercise{2(a)} $\basis \nullsp \mat{A} = \left\{ \begin{pmatrix} -2 \\ 1 \end{pmatrix} \right\}$
 
-\exercise{2(b)} 
+\exercise{2(b)} $\basis \nullsp \mat{B} = \left\{ \begin{pmatrix} -1 \\ -2 \\ 1 \end{pmatrix}  \right\}$
+
+\exercise{2(c)}
+
+\conjecture{Invertible matrices must have an empty nullspace (containing only the trivial solution) and a nullility of 0.}
+
+\exercise{2(d)} $\nullility \mat{A} = \nullility \mat{A}^{T}$ because $\mat{A} = \mat{A}^{T}$, but $\nullility \mat{B} \ne \nullility \mat{B}^{T}$ because $\mat{B} \ne \mat{B}^{T}$.
+
+\exercise{2(e)} $\basis (\nullsp \mat{M}) = \left\{ \begin{pmatrix} 20/11 & 23/11 & -4/11 & 1 \end{pmatrix} \right\}$
+
+\exercise{3(a)} $\basis (\rowsp \mat{A}) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \rank \mat{A} = 1$
+
+\exercise{3(b)} $\rank \mat{A} + \nullility \mat{A} = 2$
+
+\exercise{3(c)} No. $(0,1) \in \mathbb{R}^{2} \not\in \rowsp \mat{A}$.
+
+\exercise{3(d,e-1)}
+
+\conjecture{Where $\mat{M} \in \mathbb{R}^{n \times n}$ is invertible, $$\vspan( \rowsp \mat{M} ) = \vspan( \colsp \mat{M} ) = \mathbb{R}^{n}.$$}
+
+\exercise{3(e-2)} 
+
+\begin{align*}
+\basis(\rowsp \mat{M}) &= \left\{ \begin{pmatrix} 1 \\ 0 \\ 0 \\ -20/11 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 0 \\ -23/11 \end{pmatrix}, \begin{pmatrix} 0 \\ 0 \\ 1 \\ 4/11 \end{pmatrix} \right\} \\
+\basis(\colsp \mat{M}) &= \left\{ \begin{pmatrix}  1 \\ 0 \\ -2 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 5 \\ 3 \\ 1 \end{pmatrix} \right\}
+\end{align*}
+
+\exercise{3(f)} $\rank \mat{M} + \nullility \mat{M} = 4$
+
+\exercise{3(g)} 
+
+\conjecture{The sum of the rank and nullility of a square matrix should be equal to the number of rows and columns, and in general, it should be equal to the number of rows.}
+
+\theorem{45}{$\mat{A}$ is invertible if and only if the nullspace of $\mat{A} = \va{0}$ and $\nullility \mat{A} = 0$.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be invertbile. Therefore, $\mat{Ax=0}$ has only the trivial solution, $\mat{x=0}$. Therefore, $\nullsp \mat{A} = \va{0}$ and $\nullility \mat{A} = 0$. Conversely, if the only solution to $\mat{Ax=0}$ is the trivial solution, the rows and columns of $\mat{A}$ must be linearly independent, making $\mat{A}$ invertbile.
+\end{proof}
+
+\theorem{46}{An $n \times n$ matrix $\mat{A}$ is invertible if and only if the rowspace of $\mat{A} = \mathbb{R}^{n}$ and $\rank \mat{A} = n$}
+
+\begin{proof}
+To be invertible, the rows and columns of $\mat{A}$ must be linearly independent. As any set of vectors of size $n$ that is linearly independent must span $\mathbb{R}^{n}$, where $\mat{A}$ is an $n \times n$ invertible matrix, $\rowsp \mat{A} = \mathbb{R}^{n}$ and $\rank \mat{A} = n$.
+\end{proof}
+
+\theorem{47}{If $\mat{A}$ is an $m \times n$ matrix, then $\rank \mat{A} + \nullility \mat{A} = m$.}
+
+\begin{proof}
+Untrue. By the rank-nullility theorem, it would be $n$.
+\end{proof}
+
+\theorem{48}{$\rank \mat{A} = \rank \mat{A}^{T}.$}
+
+\begin{proof}
+Where $\mat{A} \in \mathbb{R}^{m \times n}$ is a matrix, $$\rank \mat{A} = \dim (\rowsp \mat{A}) = \dim (\colsp \mat{A}).$$
+Therefore,
+$$\rank \mat{A} = \dim(\colsp \mat{A}^{T}) = \dim(\rowsp \mat{A}^{T})$$
+implying that
+$$\rank \mat{A} = \rank \mat{A}^{T}.$$
+\end{proof}
 
 \end{document}
