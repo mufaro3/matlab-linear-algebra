@@ -20,6 +20,10 @@
 \newcommand{\set}[2]{\left\{\left.#1\right|#2\right\}}
 \newcommand{\vspan}{\text{span }}
 
+\newcommand{\rot}{\text{rot }}
+\newcommand{\dom}{\text{dom }}
+\newcommand{\range}{\text{range }}
+
 \begin{document}
 
 \textbf{\Large COMPANION NOTES AND SOLUTIONS}
@@ -1249,6 +1253,92 @@ Therefore,
 $$\rank \mat{A} = \dim(\colsp \mat{A}^{T}) = \dim(\rowsp \mat{A}^{T})$$
 implying that
 $$\rank \mat{A} = \rank \mat{A}^{T}.$$
+\end{proof}
+
+\subsection{Lab 13: Linear Transformations}
+
+\notes 
+
+\begin{enumerate}
+\item A transformation is defined as a function that applies an operation unto a vector/matrix to produce a new vector/matrix, written in the form $T(\va{x}) = \va{y}$ or $T : \va{x} \to \va{y}$ (pronounced ``a transformation such that $\va{x}$ maps to $\va{y}$'').
+\item A transformation $T$ is considered linear if it satisfies three qualities for any vectors $u, v \in \dom T$ and scalar $k$:
+\begin{enumerate}
+\item $T(\va{0}) = \va{0}$
+\item $T(\va{v} + \va{u}) = T(\va{v}) + T(\va{u})$
+\item $T(k\va{v}) = kT(\va{u})$
+\end{enumerate} 
+\item The general form of any linear transformation is
+\begin{equation}
+T(\va{x}) = \mat{A}\va{x},
+\end{equation}
+where $\mat{A}$ is $T$'s transformation matrix (also known as the standard matrix).
+\item A transformation is one-to-one if the transformation consists of distinct and unique mappings (i.e., for every input, there is only one output, and for every output, there is only one input).
+\item The kernel of a transformation is the set of vectors that map to $\va{0}$:
+\begin{equation}
+\ker T = \set{ \va{x} }{ \mat{Ax=0} } = \nullsp \mat{A}, 
+\end{equation}
+which is equal to the nullspace of its standard matrix.
+\item As such, the nullility of a transformation is the dimension of its kernel:
+\begin{equation}
+\nullility T = \dim(\ker T) = \nullility \mat{A}.
+\end{equation}
+\item The range of a transformation is the set of possible values that can be produced by the transformation.
+\item The rank of a transformation is the dimension of the range of the transformation:
+\begin{equation}
+\rank T = \dim(\range T)
+\end{equation}
+\item Common linear transformations are rotation, reflection, and dilation/contraction.
+\begin{enumerate}
+\item The $2 \times 2$ rotation matrix for a counter-clockwise rotation by $\theta$ is
+\begin{equation}
+\rot \theta = 
+\begin{pmatrix}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta
+\end{pmatrix}
+\end{equation}
+\item The dilation/contraction by a scalar $k$ (where $k \in (0,1)$ is a contraction and $k \in (1,\infty)$ is a dilation) is $k\mat{I}$.
+\end{enumerate}
+\end{enumerate}
+
+\theorem{49}{$T_{A}$ is one-to-one if and only if $A$ is invertible.}
+
+\begin{proof}
+Let $T(\mat{x}) = \mat{Ax}$ and $\mat{A} \in \mathbb{R}^{n \times n}$. It is given that $\range T = \dom T = \mathbb{R}^{n}$ Suppose $\mat{A}$ is invertible. Therefore, 
+\begin{equation*}
+\rowsp \mat{A} = \colsp \mat{A} = \range T = \mathbb{R}^{n}.
+\end{equation*}
+Thus, for input domain $\mathbb{R}^{n}$ to match output domain $\mathbb{R}^{n}$, all values $\mat{x} \in \mathbb{R}^{n}$ can only have a singular mapping to $\mat{y} \in \mathbb{R}^{n}$. 
+
+Furthermore, suppose $\mat{A}$ is singular, and thus, the rows and columns of $\mat{A}$ are linearly dependent. Therefore, there will be infinitely many solutions to $T(\va{x}) = \va{0}$, implying that $T$ cannot be one-to-one. 
+\end{proof}
+
+\theorem{50}{If $\mat{A}$ is an invertible matrix, then the kernel of $T_{A}$ is $\mathbb{R}^{n}$.}
+
+\begin{proof}
+Untrue. Where $\mat{A}$ is invertible, $\mat{Ax=0}$ only has the trivial solution. Therefore, $\ker T = \{ \va{0} \}$.
+\end{proof}
+
+\theorem{51}{If $A$ is an invertible matrix then $\nullility T_{A} = 0$.}
+
+\begin{proof}
+Where $\mat{A}$ is invertible, $\mat{Ax=0}$ only has the trivial solution. Therefore, $\nullility T = \nullility \mat{A} = 0$.
+\end{proof}
+
+\theorem{52}{If $T_{1} : \mathbb{R}^{n} \to \mathbb{R}^{m}$ and $T_{2} : \mathbb{R}^{m} \to \mathbb{R}^{p}$ are two linear transformations then $T_{2} \circ T_{1}$ is a linear transformation.}
+
+\begin{proof}
+True. The composition of $T_{1}$ by $T_{2}$ can be expressed as the composition function
+\begin{equation*}
+(T_{2} \circ T_{1})(\va{x}) = \mat{A}_{2} \mat{A}_{1} \va{x},
+\end{equation*}
+which, in itself, is a linear function (as $\mat{A}_{2} \mat{A}_{1}$ comprises another linear transformation matrix representing the combination of both transformations).
+\end{proof}
+
+\theorem{53}{$T_{1}(x_{1},x_{2}) = (x_{1} + k_{1}, x_{2} + k_{2})$ is a linear transformation where $k_{1}$ and $k_{2}$ are nonzero scalars. (This transformation represents translation.)}
+
+\begin{proof}
+Untrue. Translations break linearity as $T(\va{0}) \ne \va{0}$.
 \end{proof}
 
 \end{document}
