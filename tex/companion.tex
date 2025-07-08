@@ -15,6 +15,7 @@
 \newcommand{\nullility}{\text{nulllility }}
 \newcommand{\rowsp}{\text{rowsp }}
 \newcommand{\colsp}{\text{colsp }}
+\newcommand{\eigsp}{\text{eigsp }}
 \newcommand{\subtheorem}[1]{\textbf{SUBTHEOREM:} #1}
 \newcommand{\basis}{\text{basis }}
 \newcommand{\set}[2]{\left\{\left.#1\right|#2\right\}}
@@ -1339,6 +1340,94 @@ which, in itself, is a linear function (as $\mat{A}_{2} \mat{A}_{1}$ comprises a
 
 \begin{proof}
 Untrue. Translations break linearity as $T(\va{0}) \ne \va{0}$.
+\end{proof}
+
+\subsection{Lab 14: Eigenvalues and Eigenspaces}
+
+\notes
+
+\begin{enumerate}
+\item For a square matrix $\mat{M} \in \mathbb{R}^{n \times n}$, the eigenspace of $\mat{M}$ is the vector space of linear combinations of the eigenvectors of $\mat{M}$, and thus, it is equivalent to the nullspace of $\mat{M} - \lambda \mat{I}$ where the eigenvectors of $\mat{M}$ are the basis vectors of this eigenspace.
+\begin{equation}
+\eigsp \mat{M} = \nullsp ( \mat{M} - \lambda I ).
+\end{equation}
+\item An $n \times n$ matrix will have $n$ eigenvalues (counting algebraic multiplicity\footnote{Algebraic multiplicity of an eigenvalue is the degree of the eigenvalue as the root of the matrix's characteristic polynomial. For example, where a matrix $\mat{M}$ has an eigenvalue $\lambda$, its characteristic polynomial could have root $0 = (x-\lambda)^{k}$ where $k$ is a scalar, indicating that $\lambda$ has a multiplicity of $k$ and $\lambda$ is $k/n$ of the total $n$ eigenvalues.}).
+\item The sum of the eigenvalues of a matrix are equal to the trace of the matrix:
+\begin{equation}
+\sum \eig \mat{M} = \tr \mat{M}.
+\end{equation}
+\item The product of the eigenvalues of a matrix are equal to the determinant of the matrix:
+\begin{equation}
+\prod \eig \mat{M} = \det \mat{M}.
+\end{equation}
+\item The characteristic polynomial for a matrix will have the roots of the polynomial be the eigenvalues of the matrix, and when interpreted into polynomial-matrix form\footnote{Polynomial-matrix form means that constant terms are multiplied by $\mat{I}_{n}$ and the result is a matrix of $n \times n$.},
+\begin{equation}
+    p(\mat{M})=\va{0}.
+\end{equation}
+\item An $n \times n$ matrix will have a characteristic polynomial of degree $n$.
+\item The Cayley-Hamilton Theorem can be applied to produce the inverse matrix automatically based on the characteristic polynomial of a matrix:
+\begin{equation}
+\mat{A}^{-1} = \frac{(-1)^{n-1}}{\det \mat{A}} (\mat{A}^{n-1} + c_{2} \mat{A}^{n-2} + c_{3} \mat{A}^{n-3} + \dots + c_{n} \mat{I}),
+\end{equation}
+where the form of the characteristic polynomial is
+\begin{equation*}
+p(x) = c_{1} x^{n} + c_{2} x^{n-1} + \dots + c_{n} x +  c_{n+1}.
+\end{equation*}
+\end{enumerate}
+
+\theorem{54}{$\mat{A}$ is invertible if and only if all its eigenvalues are nonzero.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be invertible. Therefore, $\det \mat{A} \ne 0$, and likewise, as $\lambda \mat{I} = \va{0}$ where $\lambda = 0$, $\det(\mat{A} - \lambda \mat{I}) \ne 0$, so all eigenvalues of invertible matrices must be nonzero. Conversely, assume $\mat{B} \in \mathbb{R}^{n \times n}$ has only nonzero eigenvalues. This implies that $\det \mat{B} \ne 0$, proving that $\mat{B}$ is invertible. 
+\end{proof}
+
+\theorem{55}{If $\lambda$ is an eigenvalue for $\mat{A}$ then $1/\lambda$ is an eigenvalue of $\mat{A}^{-1}$}
+
+\begin{proof}
+    Let $\mat{A} \in \mathbb{R}^{n \times n}$ be invertible with eigenvalue $\lambda$ and corresponding eigenvector $\va{x}$. Therefore,
+\begin{align*}
+  \mat{A} \va{x} &= \lambda \va{x} \\
+  \mat{A}^{-1} \mat{A} \va{x} &= \mat{A}^{-1} \lambda \va{x} \\
+  \frac{1}{\lambda} \va{x} &= \mat{A}^{-1} \va{x},
+\end{align*}
+showing that $1/\lambda$ is a corresponding eigenvalue of $\mat{A}^{-1}$ for the same eigenvector $\va{x}$.
+\end{proof}
+
+\theorem{56}{If $\lambda$ is an eigenvalue of $\mat{A}$ then $\lambda^{k}$ is an eigenvalue of $\mat{A}^{k}$.}
+
+\begin{proof}
+For $k=1$,
+$$\mat{A}\va{x} = \lambda \va{x},$$ 
+and for $k=-1$, 
+$$\va{A}^{-1} \va{x} = \lambda^{-1} \va{x},$$
+both are true by assumption. For any $k$, we assume that
+$$\mat{A}^{k} \va{x} = \lambda^{k} \va{x},$$ 
+and wish to prove that
+$$\mat{A}^{k \pm 1} \va{x} = \lambda^{k \pm 1} \va{x}.$$
+By the induction hypothesis, we obtain that
+$$\mat{A}^{\pm 1}(\lambda^{k} \va{x}) = \lambda^{k} \mat{A}^{\pm 1} \va{x},$$
+which can then become
+$$= \lambda^{k \pm 1}(\lambda \va{x}) = \lambda^{k \pm 1}$$ 
+\end{proof}
+
+\theorem{57}{If $\lambda$ is an eigenvalue for $\mat{A}$ then $\lambda$ is an eigenvalue of $\mat{A}^{T}$.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ with eigenvalue $\lambda$. As $\det \mat{A} = \det \mat{A}^{T}$ and $\lambda \mat{I}$ is diagonal,
+$$\det(\mat{A} - \lambda \mat{I}) = \det(\mat{A}^{T} - \lambda \mat{I}),$$
+therefore $\lambda$ is an eigenvalue of $\mat{A}^{T}$.
+\end{proof}
+
+\theorem{58}{The eigenvalues of a triangular matrix (upper or lower) are the entries on the main diagonal.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$ be triangular. Therefore, as $\lambda \mat{I}$ is diagonal, $\mat{A} - \lambda \mat{I}$ is also triangular. Therefore, $\det(\mat{A} - \lambda \mat{I})$ is the product of the elements on the main diagonal, so the eigenvalues of $\mat{A}$ will be values that can cause any value on the main diagonal of $\mat{A}$ to become zero from subtraction, which would jut be the values on the main diagonal.   
+\end{proof}
+
+\theorem{59}{If $\mat{A}$ is an $n \times n$ matrix with $n$ distinct eigenvalues then all the corresponding eigenvectors are linearly independent.}
+
+\begin{proof}
+Let $\mat{A} \in \mathbb{R}^{n \times n}$. Suppose $\mat{A}$ has distinct eigenvalues. Therefore, for every $\lambda \in \eig \mat{A}$, the eigenspace for $\lambda$ must not intersect with the eigenspaces for any other eigenvalue, and by that assertion, the associated eigenvectors must not be linearly dependent.
 \end{proof}
 
 \end{document}

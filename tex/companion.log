@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2025.7.3)  6 JUL 2025 19:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2025.1.31)  8 JUL 2025 00:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -432,25 +432,25 @@ LaTeX Warning: Label `2(e)' multiply defined.
 )
 \openout1 = `companion.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-Package hyperref Info: Link coloring OFF on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+Package hyperref Info: Link coloring OFF on input line 28.
  (./companion.out) (./companion.out)
 \@outlinefile=\write3
 \openout3 = `companion.out'.
@@ -476,23 +476,23 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [11] [12]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `math shift' on input line 450.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\times' on input line 449.
+(hyperref)                removing `\times' on input line 450.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `math shift' on input line 450.
 
 
-Overfull \hbox (11.55846pt too wide) detected at line 480
+Overfull \hbox (11.55846pt too wide) detected at line 481
 []
  []
 
 [13] [14]
-Overfull \hbox (5.58162pt too wide) detected at line 596
+Overfull \hbox (5.58162pt too wide) detected at line 597
 \OT1/cmr/bx/n/12 E[] \OT1/cmr/m/n/12 = []  \OT1/cmr/bx/n/12 E[] \OT1/cmr/m/n/12
  = []  \OT1/cmr/bx/n/12 E[] \OT1/cmr/m/n/12 = []
  []
@@ -500,18 +500,18 @@ Overfull \hbox (5.58162pt too wide) detected at line 596
 [15] [16] [17] [18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 743.
+(hyperref)                removing `math shift' on input line 744.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 743.
+(hyperref)                removing `subscript' on input line 744.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 743.
+(hyperref)                removing `math shift' on input line 744.
 
 [19]
-Overfull \hbox (26.15906pt too wide) in paragraph at lines 755--756
+Overfull \hbox (26.15906pt too wide) in paragraph at lines 756--757
 []\OT1/cmr/m/n/12 Given $\OML/cmm/m/it/12 Z[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/1
 2 f\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1
 /cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 3\OML/cmm/m/it/12 ; \OT1/cmr/m/
@@ -522,7 +522,7 @@ mr/m/n/12 3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/
  []
 
 
-Overfull \hbox (50.19806pt too wide) in paragraph at lines 759--760
+Overfull \hbox (50.19806pt too wide) in paragraph at lines 760--761
 []\OT1/cmr/m/n/12 The cor-re-spond-ing mul-ti-plica-tive in-verses for $\OML/cm
 m/m/it/12 x \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 0 \OMS/cmsy/m/n/12 2 \OML/cmm/
 m/it/12 Z[]$ \OT1/cmr/m/n/12 would be $([]\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\
@@ -531,21 +531,21 @@ OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm
  []
 
 [20] [21] [22]
-Overfull \hbox (2.06058pt too wide) in paragraph at lines 879--880
+Overfull \hbox (2.06058pt too wide) in paragraph at lines 880--881
 \OT1/cmr/m/n/12 ma-trix are the in-verses of the eigen-val-ues of the ma-trix (
 $[]\OT1/cmr/bx/n/12 U \OT1/cmr/m/n/12 = ([]\OT1/cmr/bx/n/12 U[]\OT1/cmr/m/n/12 
 )[]$). 
  []
 
 [23] [24] [25]
-Overfull \hbox (10.7028pt too wide) in paragraph at lines 980--981
+Overfull \hbox (10.7028pt too wide) in paragraph at lines 981--982
 [][][]$ \OT1/cmr/m/n/12 as $[][] = [][] \OMS/cmsy/m/n/12 ^^@ []\OT1/cmr/bx/n/12
  I$\OT1/cmr/m/n/12 . There-fore, as $[]\OT1/cmr/bx/n/12 A \OT1/cmr/m/n/12 = \OM
 S/cmsy/m/n/12 f\OML/cmm/m/it/12 ^^U\OMS/cmsy/m/n/12 j [][][] \OT1/cmr/m/n/12 =
  []
 
 [26]
-Overfull \hbox (3.47646pt too wide) in paragraph at lines 1000--1001
+Overfull \hbox (3.47646pt too wide) in paragraph at lines 1001--1002
 []\OT1/cmr/m/n/12 A com-mon ex-am-ple is di-men-sion-al-ity, like $\U/msb/m/n/1
 2 R[]\OML/cmm/m/it/12 ; \U/msb/m/n/12 R[]\OML/cmm/m/it/12 ; \U/msb/m/n/12 R[]\O
 ML/cmm/m/it/12 ; \U/msb/m/n/12 R[]\OML/cmm/m/it/12 ; \U/msb/m/n/12 R[]\OML/cmm/
@@ -553,14 +553,14 @@ m/it/12 ; [] $\OT1/cmr/m/n/12 .
  []
 
 [27] [28] [29] [30]
-Overfull \hbox (14.17854pt too wide) in paragraph at lines 1116--1117
+Overfull \hbox (14.17854pt too wide) in paragraph at lines 1117--1118
 []\OT1/cmr/m/n/12 Where $\OML/cmm/m/it/12 V$ \OT1/cmr/m/n/12 is a vec-tor space
 , $[] + [] = [] + []$ and $\OML/cmm/m/it/12 k[] \OT1/cmr/m/n/12 = (\OML/cmm/m/i
 t/12 ku[]; ku[]; [] ; ku[]\OT1/cmr/m/n/12 )$
  []
 
 [31] [32] [33]
-Overfull \hbox (27.99734pt too wide) in paragraph at lines 1203--1204
+Overfull \hbox (27.99734pt too wide) in paragraph at lines 1204--1205
 []\OT1/cmr/bx/n/12 EXERCISE 2(d)[] $[]A \OT1/cmr/m/n/12 = []\OT1/cmr/bx/n/12 A[
 ]$ \OT1/cmr/m/n/12 be-cause $\OT1/cmr/bx/n/12 A \OT1/cmr/m/n/12 = \OT1/cmr/bx/n
 /12 A[]$\OT1/cmr/m/n/12 , but $[]\OT1/cmr/bx/n/12 B \OMS/cmsy/m/n/12 6\OT1/cmr/
@@ -568,23 +568,23 @@ m/n/12 =
  []
 
 [34] [35]
-Overfull \hbox (49.31488pt too wide) in paragraph at lines 1290--1291
+Overfull \hbox (49.31488pt too wide) in paragraph at lines 1291--1292
 []\OT1/cmr/m/n/12 Common lin-ear trans-for-ma-tions are ro-ta-tion, re-flec-tio
 n, and di-la-tion/contraction. 
  []
 
-[36] [37] [38] (./companion.aux)
+[36] [37] [38] [39] [40] [41] (./companion.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `companion.out' has not changed.
-(rerunfilecheck)             Checksum: 547F0C7CC98404C9156378690D691145;3902.
+(rerunfilecheck)             Checksum: 5CCC41B9A77DF7E4E57BA3FB821A7DB1;4147.
  ) 
 Here is how much of TeX's memory you used:
- 10041 strings out of 476091
- 150758 string characters out of 5794082
+ 10061 strings out of 476091
+ 150953 string characters out of 5794081
  1870330 words of memory out of 5000000
- 30114 multiletter control sequences out of 15000+600000
+ 30116 multiletter control sequences out of 15000+600000
  523992 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,19n,77p,828b,589s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -607,10 +607,10 @@ st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/symbols/msbm10.pfb>
-Output written on companion.pdf (38 pages, 307740 bytes).
+Output written on companion.pdf (41 pages, 318263 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 457 compressed objects within 5 object streams
- 197 named destinations out of 1000 (max. 500000)
- 129 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 578 PDF objects out of 1000 (max. 8388607)
+ 490 compressed objects within 5 object streams
+ 215 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
