@@ -1430,4 +1430,79 @@ Let $\mat{A} \in \mathbb{R}^{n \times n}$ be triangular. Therefore, as $\lambda 
 Let $\mat{A} \in \mathbb{R}^{n \times n}$. Suppose $\mat{A}$ has distinct eigenvalues. Therefore, for every $\lambda \in \eig \mat{A}$, the eigenspace for $\lambda$ must not intersect with the eigenspaces for any other eigenvalue, and by that assertion, the associated eigenvectors must not be linearly dependent.
 \end{proof}
 
+\subsection{Lab 15: Markov Chains}
+
+\notes
+
+\begin{enumerate}
+\item Markov models are statistical models used to describe a series of states and the transitions (usually random transitions) between those states (like a graph).
+\item Much like a graph, markov models can be represented using a matrix, where $M_{ij}$ is the probability of transition from $i \to j$.
+\item The dormant eigenvalue of a markov matrix is the largest eigenvalue of the matrix, which is the largest eigenvalue of the matrix.
+\item The long-run solution state of a markov chain is stable (convergent to a singular state) if the markov matrix has a dormant eigenvalue of exactly 1. 
+\end{enumerate}
+
+\section{Chapter 4: Orthogonality}
+
+\subsection{Lab 16: Inner Product Spaces}
+
+\notes
+
+\begin{enumerate}
+  \item A euclidean inner product $<\va{u}, \va{v}>$ is equivalent to a dot product $\va{u} \vdot \va{v}$. A vector space with a defined inner product is called an inner product space.
+\begin{equation}
+<\va{u},\va{v}> = \va{u} \vdot \va{v} = \sum_{i=1}^{n} u_{i} v_{i}
+\end{equation}
+\item The normalization (norm) or magnitude $||\va{v}||$ of a vector $\va{v}$ is the square root of a vector's euclidean inner product with itself
+\begin{equation}
+||\va{v}|| = \sqrt{<\va{v},\va{v}>}
+\end{equation}
+\item Unit vectors have a magnitude of 1, and are denoted with a hat: $\vu{v}$.
+\item Two vectors are considered orthogonal if their inner/dot product is 0.
+\begin{enumerate}
+\item In $\mathbb{R}^{2}$, orthogonality is analogous with perpendicularity.
+\end{enumerate}
+\item Two vectors are considered orthonormal if they are orthogonal and they are both unit vectors.
+\item A set is considered orthogonal if all of its enclosed vectors are orthogonal to each other and orthonormal if all of its enclosed vectors are unit vectors.
+\item For a given subset $V$ of a larger set $S$, its orthonormal complement $W$ is the subset containing all vectors $\va{v} \in S$ in the larger set that are orthogonal to all vectors in the other subset $V$.
+\item The Gram-Schmidt Process is an algorithm for finding an orthonormal set of vectors that spans an inner product space given a starting subset, following the recursive formula
+\begin{equation}
+\va{u}_{n} = \va{v}_{n} - \sum_{i=1}^{n-1} \proj_{\va{u}_{i}} \va{v}_{n}, \hspace{1em} \va{e}_{n} = \frac{\va{u}_{n}}{||\va{u}_{n}||},
+\end{equation}
+for input vectors $\{\va{v}_{1}, \va{v}_{2}, \dots, \va{v}_{k} \}$ producing the required set of ortogonal vectors $\{ \va{u}_{1}, \va{u}_{2}, \dots \va{u}_{k} \}$ and the normalized vectors $\{\va{e}_{1}, \va{e}_{2}, \dots, \va{e}_{k} \}$.
+\end{enumerate}
+
+\theorem{60}{If $\va{u}$ and $\va{v}$ are orthogonal vectors in $V$, then $$||\va{u} + \va{v}||^2 = ||\va{u}||^2 + ||\va{v}||^2.$$}
+
+\begin{proof}
+By definition,
+$$||\va{u}||^2 + ||\va{v}||^2 = \sum_{i=1}^{n} u_{i}^2 + \sum_{i=1}^{n} v_{i}^2 = \sum_{i=1}^{n} (u_i^2 + v_i^2),$$
+and similarly,
+$$||\va{u} + \va{v}||^2 = \sum_{i=1}^{n} (\va{u} + \va{v})_{i}^2.$$
+Therefore, we must prove
+$$\sum_{i=1}^{n} (u_{i}^2 + v_i^2) = \sum_{i=1}^{n} (u_i + v_i)^{2},$$
+which, expanded, becomes proving that
+$$\sum u_i v_i = 0,$$
+and this is true by definition as $\va{u}$ and $\va{v}$ are orthogonal.
+\end{proof}
+
+\theorem{61}{If $\va{u}$ and $\va{v}$ are vectors in $V$ then $$|<\va{u}, \va{v}>| < ||\va{u}||||\va{v}||.$$}
+
+\begin{proof}
+This relation can be rewritten into its definitions as
+$$\left|\sum_{i=1}^n u_i v_i\right| < \sqrt{\sum_{i=1}^n (u_i v_i)^2 },$$
+or, even further, can be expanded based on the definition of absolute value into
+$$\textstyle \left(\sqrt{\sum_{i=1}^n u_i v_i}\right)^2 < \sqrt{\sum_{i=1}^n (u_i v_i)^2 },$$
+and thus, this relation is untrue. The two are equivalent.
+\end{proof}
+
+\theorem{62}{If $\va{u}$ and $\va{v}$ are vectors in $V$ then $$||\va{u} + \va{v}|| \le ||\va{u}|| + ||\va{v}||.$$}
+
+\theorem{63}{If $\va{u}$ and $\va{v}$ are vectors in $V$ then $$||\va{u} + \va{v}||^2 + ||\va{u} - \va{v}||^2 = 2(||\va{u}||^2 + ||\va{v}||^2).$$}
+
+\theorem{64}{If $\{ \va{v}_{1}, \va{v}_{2}, \dots, \va{v}_{n} \}$ is an orthonormal set of vectors in $V$, then $$||k_{1}\va{v}_{1} + k_{2}\va{v}_{2} + \dots + k_{n} \va{v}_{n} ||^2 = |k_{1}|^2 + |k_{2}|^2 + \dots + |k_{n}|^2.$$}
+
+\theorem{65}{Every orthonormal set of vectors is linearly independent.}
+
+\theorem{66}{If $T:\mathbb{R}^{n} \to \mathbb{R}^{n}$ is the linear transformation defined by the left multiplication of the $n \times n$ matrix $\mat{A}$ and vector $\va{v}$ is in the range of $T$ then $\va{v}$ is orthogonal to the nullspace of $\mat{A}$.}
+
 \end{document}

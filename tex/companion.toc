@@ -15,3 +15,6 @@
 \contentsline {subsection}{\numberline {3.2}Lab 12: Basis Vectors, Null Space, Rank, Column/Rowspace}{32}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Lab 13: Linear Transformations}{36}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Lab 14: Eigenvalues and Eigenspaces}{38}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Lab 15: Markov Chains}{41}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Chapter 4: Orthogonality}{41}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Lab 16: Inner Product Spaces}{41}{subsection.4.1}%
